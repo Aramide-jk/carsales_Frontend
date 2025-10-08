@@ -10,11 +10,17 @@ import type {
 
 // --- Setup Axios instance ---
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api",
   headers: {
     "Content-Type": "application/json",
   },
 });
+// const api = axios.create({
+//   baseURL: "http://localhost:5000/api",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// });
 
 // --- Attach token automatically if available ---
 api.interceptors.request.use((config) => {
