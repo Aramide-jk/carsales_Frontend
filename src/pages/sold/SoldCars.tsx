@@ -1,7 +1,7 @@
-import React, { useState, useMemo, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Search, Calendar, CheckCircle, TrendingUp, Eye } from "lucide-react";
+import { Search, CheckCircle } from "lucide-react";
 import { getSoldCars } from "../../services/api";
 import type { Car } from "../../types";
 import CarCard from "../../components/CarCard";
@@ -197,10 +197,6 @@ const SoldCars: React.FC = () => {
   }, [soldCars, searchTerm]);
 
   // Stats
-  const totalSoldValue = soldCars.reduce((sum, car) => sum + car.price, 0);
-  const averagePrice =
-    soldCars.length > 0 ? Math.round(totalSoldValue / soldCars.length) : 0;
-
   const stats = [
     {
       icon: CheckCircle,

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import CarCard from "../../components/CarCard";
@@ -40,7 +40,7 @@ const Cars: React.FC = () => {
   const [transmissionFilter, setTransmissionFilter] = useState("");
   const [sortBy, setSortBy] = useState("name");
 
-  const { token } = useAuth();
+  useAuth();
 
   useEffect(() => {
     const fetchCars = async () => {

@@ -18,7 +18,6 @@ import {
   ArrowRight,
   ArrowLeft,
   CreditCard,
-  Shield,
   X,
 } from "lucide-react";
 import Button from "../../components/Button";
