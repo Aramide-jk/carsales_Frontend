@@ -17,8 +17,8 @@ import {
   Award,
   ArrowRight,
   ArrowLeft,
-  CreditCard,
   X,
+  Shield,
 } from "lucide-react";
 import Button from "../../components/Button";
 import { createSellRequest } from "../../services/api";
