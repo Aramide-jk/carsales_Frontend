@@ -8,8 +8,8 @@ import type { Car } from "../../types";
 import { useAuth } from "../../contexts/AuthContext";
 import {
   CarsContainer,
-  HeaderSection,
   PageTitle,
+  HeaderSection,
   PageSubtitle,
   FiltersSection,
   FiltersContainer,
