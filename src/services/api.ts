@@ -9,12 +9,19 @@ import type {
 } from "../types";
 
 // --- Setup Axios instance ---
+// const api = axios.create({
+//   baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api",
+//   headers: {
+//     "Content-Type": "application/jsonn;",
+//   },
+// });
+
+const base = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api",
-  headers: {
-    "Content-Type": "application/jsonn;",
-  },
+  baseURL: `${base}/api`,
+  headers: { "Content-Type": "application/json" },
 });
+
 // const api = axios.create({
 //   baseURL: "http://localhost:5000/api",
 //   headers: {
