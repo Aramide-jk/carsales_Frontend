@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Menu, X, Car } from "lucide-react";
+import { Home, Car, Tag, Info, User, Phone } from "lucide-react";
 
 const NavContainer = styled(motion.nav)<{ $isScrolled: boolean }>`
   position: fixed;
@@ -11,71 +11,101 @@ const NavContainer = styled(motion.nav)<{ $isScrolled: boolean }>`
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1rem 2rem;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   background: ${(props) =>
-    props.$isScrolled ? "rgba(248, 247, 244, 0.95)" : "white"};
+    props.$isScrolled ? "rgba(248, 247, 244, 0.75)" : "white"};
   color: ${(props) => (props.$isScrolled ? "black" : "black")};
   border-bottom: ${(props) =>
     props.$isScrolled ? "1px solid rgba(220, 38, 38, 0.1)" : "none"};
   transition: background 0.3s ease, color 0.3s ease, border-bottom 0.3s ease;
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 0.8rem 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+  }
+`;
+
+const NavWrapper = styled.div`
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.5rem;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
   }
 `;
 
 const NavContent = styled.div`
   max-width: 1400px;
   margin: 0 auto;
-  display: flex;
+  padding: 0 2rem;
+  margin-bottom: 0.5rem;
   justify-content: space-between;
   align-items: center;
+  display: flex;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Logo = styled(Link)`
   display: flex;
   align-items: center;
+  justify-content: center;
+  transition: border-bottom 0.3s ease;
   gap: 0.5rem;
   font-family: "Playfair Display", serif;
   font-size: 1.8rem;
   font-weight: 700;
   color: #1a1a1a;
+  text-transform: uppercase;
   text-decoration: none;
 
   .logo-icon {
     color: #dc2626;
   }
+
+  .logo-text {
+    color: #dc2626;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+`;
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background: rgba(220, 38, 38, 0.2);
+  margin: 0.2rem 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
-const NavLinks = styled.div<{ $isOpen: boolean }>`
+const NavLinksContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+`;
+
+const NavLinks = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
-
-  @media (max-width: 768px) {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(248, 247, 244, 0.98);
-    backdrop-filter: blur(20px);
-    flex-direction: column;
-    justify-content: center;
-    gap: 3rem;
-    transform: ${(props) =>
-      props.$isOpen ? "translateX(0)" : "translateX(100%)"};
-    transition: transform 0.3s ease;
-  }
 `;
 
 const NavLink = styled(Link)<{ $isActive: boolean }>`
   color: #2b2b2b;
   font-weight: 500;
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
 
   &:hover {
     color: #dc2626;
@@ -95,10 +125,6 @@ const NavLink = styled(Link)<{ $isActive: boolean }>`
   &:hover::after {
     width: 100%;
   }
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
 `;
 
 const NavButtons = styled.div`
@@ -114,7 +140,7 @@ const NavButtons = styled.div`
 const SignInButton = styled(Link)`
   background: transparent;
   color: #dc2626;
-  padding: 0.8rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   border: 2px solid #dc2626;
   border-radius: 16px;
   font-weight: 600;
@@ -147,37 +173,78 @@ const LogoutButton = styled.button`
   }
 `;
 
-const MobileMenuButton = styled.button`
+const BottomNav = styled.nav<{ $hidden: boolean }>`
   display: none;
-  background: transparent;
-  color: #2b2b2b;
-  padding: 0.5rem;
 
   @media (max-width: 768px) {
-    display: block;
-    z-index: 1001;
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+    transition: transform 0.3s ease-in-out;
+    transform: ${(props) =>
+      props.$hidden ? "translateY(100%)" : "translateY(0)"};
+    z-index: 999;
+  }
+`;
+
+const BottomNavItem = styled(Link)<{ $active: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  color: ${(props) => (props.$active ? "#dc2626" : "#666")};
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  padding: 0.2rem 0.5rem;
+
+  svg {
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    color: #dc2626;
   }
 `;
 
 // === NAVBAR COMPONENT === //
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isBottomNavHidden, setIsBottomNavHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { token, logout } = useAuth(); // ✅ from context
-  const isSignedIn = !!token; // checks if logged in
+  const { token, logout } = useAuth();
+  const isSignedIn = !!token;
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 50);
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsBottomNavHidden(true);
+      } else {
+        setIsBottomNavHidden(false);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const handleLogout = () => {
-    logout(); // clear token + context
+    logout();
     navigate("/signin");
   };
 
@@ -191,44 +258,72 @@ const Navbar: React.FC = () => {
     { path: "/contact", label: "Contact" },
   ];
 
+  const mobileNavItems = [
+    { path: "/", label: "Home", icon: Home },
+    { path: "/cars", label: "Cars", icon: Car },
+    { path: "/sell-your-car", label: "Sell", icon: Tag },
+    { path: "/about", label: "About", icon: Info },
+    { path: "/contact", label: "Contact", icon: Phone },
+    {
+      path: isSignedIn ? "/profile" : "/signin",
+      label: isSignedIn ? "Profile" : "Sign In",
+      icon: User,
+    },
+  ];
+
   return (
-    <NavContainer
-      $isScrolled={isScrolled}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}>
-      <NavContent>
-        <Logo to="/">
-          <Car className="logo-icon" size={28} />
-          jk_Autos
-        </Logo>
+    <>
+      <NavContainer
+        $isScrolled={isScrolled}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}>
+        <NavWrapper>
+          <Logo to="/">
+            <span className="logo-text">jk</span> _Autos
+          </Logo>
+        </NavWrapper>
+        <Divider />
+        <NavContent>
+          <NavLinksContainer>
+            <NavLinks>
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  $isActive={location.pathname === item.path}>
+                  {item.label}
+                </NavLink>
+              ))}
+            </NavLinks>
+          </NavLinksContainer>
 
-        <NavLinks $isOpen={isMobileMenuOpen}>
-          {navItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              $isActive={location.pathname === item.path}
-              onClick={() => setIsMobileMenuOpen(false)}>
-              {item.label}
-            </NavLink>
-          ))}
-        </NavLinks>
+          <NavButtons>
+            {isSignedIn ? (
+              <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
+            ) : (
+              <SignInButton to="/signin">Sign In</SignInButton>
+            )}
+          </NavButtons>
+        </NavContent>
+      </NavContainer>
 
-        <NavButtons>
-          {isSignedIn ? (
-            <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
-          ) : (
-            <SignInButton to="/signin">Sign In</SignInButton>
-          )}
-        </NavButtons>
-
-        <MobileMenuButton
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </MobileMenuButton>
-      </NavContent>
-    </NavContainer>
+      {/* Mobile Bottom Navigation */}
+      <BottomNav $hidden={isBottomNavHidden}>
+        {mobileNavItems.map((item) => (
+          <BottomNavItem
+            key={item.path}
+            to={item.path}
+            $active={location.pathname === item.path}>
+            <item.icon
+              size={22}
+              strokeWidth={location.pathname === item.path ? 2.5 : 2}
+            />
+            <span>{item.label}</span>
+          </BottomNavItem>
+        ))}
+      </BottomNav>
+    </>
   );
 };
 

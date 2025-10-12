@@ -4,26 +4,74 @@ import { Search } from "lucide-react";
 
 export const CarsContainer = styled.div`
   min-height: 100vh;
-  padding-top: 100px;
+  padding-top: 50px;
 `;
 
 export const HeaderSection = styled.section`
-  padding: 3rem 2rem;
+  padding: 8rem 2rem;
   text-align: center;
-  background: linear-gradient(135deg, #f8f7f4 0%, rgba(220, 38, 38, 0.1) 100%);
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  color: white;
+
+  @media (max-width: 768px) {
+    padding: 4rem 2rem;
+  }
+`;
+
+export const HeaderBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+`;
+
+export const HeaderOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+`;
+
+export const HeaderContent = styled.div`
+  position: relative;
+  z-index: 2;
 `;
 
 export const PageTitle = styled(motion.h1)`
   font-family: "Playfair Display", serif;
   font-size: clamp(2.5rem, 5vw, 3.5rem);
+  // font-size: 3rem;
   font-weight: 500;
-  color: #2b2b2b;
-  margin-bottom: 1rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 1rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #dc2626;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const PageSubtitle = styled(motion.p)`
   font-size: 1.2rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.9);
   max-width: 600px;
   margin: 0 auto;
 `;
@@ -31,7 +79,7 @@ export const PageSubtitle = styled(motion.p)`
 export const FiltersSection = styled.section`
   padding: 2rem;
   max-width: 1280px;
-  margin: 0 auto;
+  // margin: 0 auto;
   border-bottom: 1px solid rgba(220, 38, 38, 0.2);
 `;
 
@@ -126,8 +174,12 @@ export const ClearFiltersButton = styled.button`
 
 export const ResultsSection = styled.section`
   padding: 2rem;
-  max-width: 1280px;
-  margin: 0 auto;
+  max-width: 1500px;
+  // margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `;
 
 export const ResultsHeader = styled.div`
@@ -146,12 +198,20 @@ export const ResultsHeader = styled.div`
 export const ResultsCount = styled.p`
   color: #666;
   font-size: 1.1rem;
+
+  @media (max-width: 768px) {
+    margin-left: 1rem;
+  }
 `;
 
 export const SortContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    margin-left: 1rem;
+  }
 `;
 
 export const SortLabel = styled.span`
@@ -161,8 +221,8 @@ export const SortLabel = styled.span`
 
 export const CarsGrid = styled.div`
   display: grid;
-  // grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  // grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   margin-bottom: 3rem;
 
@@ -187,4 +247,43 @@ export const NoResults = styled.div`
     font-size: 1.1rem;
     margin-bottom: 2rem;
   }
+`;
+
+export const PaginationContainer = styled.div`
+  background: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+`;
+
+export const PageButton = styled.button<{ $active?: boolean }>`
+  padding: 0.6rem 1.2rem;
+  border: 2px solid
+    ${(props) => (props.$active ? "#dc2626" : "rgba(220, 38, 38, 0.2)")};
+  background: ${(props) => (props.$active ? "#dc2626" : "white")};
+  color: ${(props) => (props.$active ? "white" : "#2b2b2b")};
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background: #dc2626;
+    color: white;
+    border-color: #dc2626;
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+export const PageInfo = styled.span`
+  color: #666;
+  font-weight: 500;
 `;

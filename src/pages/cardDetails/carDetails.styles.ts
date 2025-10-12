@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-
-
 export const DetailContainer = styled.div`
   min-height: 100vh;
   padding-top: 100px;
+
+  @media (max-width: 768px) {
+    padding-top: 50px;
+  }
 `;
 
 export const BackButton = styled(Link)`
@@ -26,6 +28,12 @@ export const BackButton = styled(Link)`
     background: #dc2626;
     color: white;
     transform: translateX(-5px);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    border: none;
   }
 `;
 
@@ -54,7 +62,6 @@ export const MainImageContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 2000px;
-  height: 600px;
   // border-radius: 20px;
   overflow: hidden;
   margin-bottom: 1rem;
@@ -63,13 +70,14 @@ export const MainImageContainer = styled.div`
 
 export const MainImage = styled.img`
   width: 100%;
-  height: 100%;
+  height: 10%;
   object-fit: cover;
   border-radius: 10px;
   background-color: #f8f7f4;
 
   @media (max-width: 480px) {
     border-radius: 0;
+    height: 50vh;
   }
 `;
 
@@ -93,6 +101,12 @@ export const FullscreenImageContainer = styled.div`
   overflow: hidden;
   border-radius: 12px;
   cursor: default;
+
+  @media (max-width: 480px) {
+    border-radius: 0;
+    cursor: zoom-out;
+    height: 100vh;
+  }
 
   img {
     width: 100%;
@@ -129,8 +143,8 @@ export const CloseButton = styled.button`
     transform: scale(1.1);
   }
   @media (max-width: 768px) {
-    top: 40px;
-    right: 10px;
+    top: 70px;
+    right: 20px;
   }
 `;
 
@@ -170,20 +184,33 @@ export const ThumbnailGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+
+  @media (max-width: 480px) {
+    gap: 0.2rem;
+  }
 `;
 
 export const Thumbnail = styled.img<{ $active: boolean }>`
   width: 100%;
   height: 120px;
   object-fit: cover;
-  border-radius: 50px;
+  border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 3px solid ${(props) => (props.$active ? "#DC2626" : "transparent")};
 
   &:hover {
+    hight: 100px;
+  }
+
+  &:hover {
     transform: scale(1.05);
     border-color: #dc2626;
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 20px;
+    height: 100px;
   }
 `;
 
@@ -201,18 +228,27 @@ export const CarTitle = styled(motion.h1)`
   font-weight: 600;
   color: #1a1a1a;
   margin-bottom: 0.5rem;
+  text-transform: capitalize;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const CarPrice = styled(motion.div)`
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #dc2626;
   font-family: "Playfair Display", serif;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const CarDescription = styled(motion.p)`
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #666;
   line-height: 1.6;
   margin-bottom: 2rem;
@@ -221,7 +257,7 @@ export const CarDescription = styled(motion.p)`
 export const SpecsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
   margin-bottom: 2rem;
 
   @media (max-width: 480px) {
@@ -236,6 +272,10 @@ export const SpecItem = styled.div`
   padding: 1rem;
   background: rgba(220, 38, 38, 0.05);
   border-radius: 12px;
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 
   svg {
     color: #dc2626;
@@ -263,9 +303,13 @@ export const FeaturesSection = styled.div`
 
 export const SectionTitle = styled.h3`
   font-family: "Playfair Display", serif;
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #1a1a1a;
   margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const FeaturesList = styled.ul`

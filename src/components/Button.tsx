@@ -63,13 +63,18 @@ const ButtonBase = styled(motion.button)<{
     switch (props.$variant) {
       case "secondary":
         return css`
-          background: #2b2b2b;
-          color: white;
+          // background: #2b2b2b;
+          color: black;
+          border-bottom: 2px solid #dc2626;
+          gap: 10px;
+          font-weight: 500;
+
 
           &:hover:not(:disabled) {
-            background: #1a1a1a;
+            // background: #1a1a1a;
+          color:red;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(43, 43, 43, 0.3);
+            // box-shadow: 0 10px 25px rgba(43, 43, 43, 0.2);
 
             @media (max-width: 768px) {
             border-radius: 0px;

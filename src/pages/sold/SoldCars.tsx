@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Search, CheckCircle } from "lucide-react";
+import { Search } from "lucide-react";
 import { getSoldCars } from "../../services/api";
 import type { Car } from "../../types";
 import CarCard from "../../components/CarCard";
@@ -12,9 +12,16 @@ const SoldCarsContainer = styled.div`
 `;
 
 const HeaderSection = styled.section`
-  padding: 3rem 2rem;
+  padding: 8rem 2rem;
+  position: relative;
   text-align: center;
-  background: linear-gradient(135deg, #f8f7f4 0%, rgba(220, 38, 38, 0.1) 100%);
+  background-size: cover;
+  background-position: center;
+  color: white;
+
+  @media (max-width: 768px) {
+    padding: 4rem 2rem;
+  }
 `;
 
 const PageTitle = styled(motion.h1)`
@@ -22,61 +29,88 @@ const PageTitle = styled(motion.h1)`
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 1rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 1rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #dc2626;
+  }
 `;
 
-const PageSubtitle = styled(motion.p)`
-  font-size: 1.2rem;
-  color: #666;
-  max-width: 600px;
-  margin: 0 auto;
+// const PageSubtitle = styled(motion.p)`
+//   font-size: 1.2rem;
+//   color: #666;
+//   color: rgba(255, 255, 255, 0.9);
+//   max-width: 600px;
+//   margin: 0 auto;
+// `;
+
+const HeaderOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 `;
 
-const StatsSection = styled.section`
-  padding: 1rem 0.5rem;
-  // background: rgba(220, 38, 38, 0.05);
+const HeaderContent = styled.div`
+  position: relative;
+  z-index: 2;
 `;
 
-const StatsGrid = styled.div`
-  display: grid;
-  // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  // gap: 2rem;
-  max-width: 200px;
-  margin: 0 auto;
-`;
+// const StatsSection = styled.section`
+//   padding: 1rem 0.5rem;
+//   // background: rgba(220, 38, 38, 0.05);
+// `;
 
-const StatCard = styled(motion.div)`
-  background: white;
-  padding: 0.5rem;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-`;
+// const StatsGrid = styled.div`
+//   display: grid;
+//   // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+//   // gap: 2rem;
+//   max-width: 200px;
+//   margin: 0 auto;
+// `;
 
-const StatIcon = styled.div`
-  width: 60px;
-  height: 60px;
-  background: rgba(220, 38, 38, 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  color: #dc2626;
-`;
+// const StatCard = styled(motion.div)`
+//   background: white;
+//   padding: 0.5rem;
+//   border-radius: 20px;
+//   text-align: center;
+//   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+// `;
 
-const StatNumber = styled.div`
-  font-family: "Playfair Display", serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #dc2626;
-  margin-bottom: 0.5rem;
-`;
+// const StatIcon = styled.div`
+//   width: 60px;
+//   height: 60px;
+//   background: rgba(220, 38, 38, 0.1);
+//   border-radius: 50%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   margin: 0 auto 1rem;
+//   color: #dc2626;
+// `;
 
-const StatLabel = styled.div`
-  color: #2b2b2b;
-  font-weight: 500;
-`;
+// const StatNumber = styled.div`
+//   font-family: "Playfair Display", serif;
+//   font-size: 2rem;
+//   font-weight: 700;
+//   color: #dc2626;
+//   margin-bottom: 0.5rem;
+// `;
+
+// const StatLabel = styled.div`
+//   color: #2b2b2b;
+//   font-weight: 500;
+// `;
 
 const FiltersSection = styled.section`
   padding: 2rem;
@@ -197,23 +231,23 @@ const SoldCars: React.FC = () => {
   }, [soldCars, searchTerm]);
 
   // Stats
-  const stats = [
-    {
-      icon: CheckCircle,
-      number: soldCars.length.toString(),
-      label: "Cars Sold",
-    },
-    // {
-    //   icon: TrendingUp,
-    //   number: `₦${Math.round(totalSoldValue / 1000)}K`,
-    //   label: "Total Sales",
-    // },
-    // {
-    //   icon: Calendar,
-    //   number: `₦${Math.round(averagePrice / 1000)}K`,
-    //   label: "Average Price",
-    // },
-  ];
+  // const stats = [
+  //   {
+  //     icon: CheckCircle,
+  //     number: soldCars.length.toString(),
+  //     label: "Cars Sold",
+  //   },
+  //   {
+  //     icon: TrendingUp,
+  //     number: `₦${Math.round(totalSoldValue / 1000)}K`,
+  //     label: "Total Sales",
+  //   },
+  //   {
+  //     icon: Calendar,
+  //     number: `₦${Math.round(averagePrice / 1000)}K`,
+  //     label: "Average Price",
+  //   },
+  // ];
 
   // Render
   if (loading) {
@@ -235,24 +269,30 @@ const SoldCars: React.FC = () => {
   return (
     <SoldCarsContainer>
       {/* Header */}
-      <HeaderSection>
-        <PageTitle
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}>
-          Recently Sold Vehicles
-        </PageTitle>
-        <PageSubtitle
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}>
-          Discover the luxury vehicles that have found their perfect owners
-          through jk_Autos
-        </PageSubtitle>
+      <HeaderSection
+        style={{
+          backgroundImage: `url(https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)`,
+        }}>
+        <HeaderOverlay />
+        <HeaderContent>
+          <PageTitle
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}>
+            Recently Sold Vehicles
+          </PageTitle>
+          {/* <PageSubtitle
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}>
+            Discover the luxury vehicles that have found their perfect owners
+            through jk_Autos
+          </PageSubtitle> */}
+        </HeaderContent>
       </HeaderSection>
 
       {/* Stats */}
-      <StatsSection>
+      {/* <StatsSection>
         <StatsGrid>
           {stats.map((stat, index) => (
             <StatCard
@@ -268,7 +308,7 @@ const SoldCars: React.FC = () => {
             </StatCard>
           ))}
         </StatsGrid>
-      </StatsSection>
+      </StatsSection> */}
 
       {/* Search */}
       <FiltersSection>

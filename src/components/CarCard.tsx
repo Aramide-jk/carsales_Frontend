@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Eye, Calendar, Fuel, Settings } from "lucide-react";
+import { Eye, Calendar, Fuel, Settings, Shield } from "lucide-react";
 import Button from "./Button";
 import type { Car } from "../types";
 
@@ -14,20 +14,19 @@ interface CarCardProps {
 
 // Format prices to  Naira
 
-const formatMileage = (mileage: string): string => {
-  const numericMileage = parseInt(mileage, 10);
-  if (isNaN(numericMileage)) {
-    // Return original string or a default if it's not a valid number
-    return mileage;
-  }
-  return numericMileage.toLocaleString();
-};
+// const formatMileage = (mileage: string): string => {
+//   const numericMileage = parseInt(mileage, 10);
+//   if (isNaN(numericMileage)) {
+//     return mileage;
+//   }
+//   return numericMileage.toLocaleString();
+// };
 
 const CardContainer = styled(motion.div)`
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   cursor: pointer;
 
@@ -40,12 +39,9 @@ const CardContainer = styled(motion.div)`
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 3 00px;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
-
-  // &:hover {
-  //   transform: translateY(-1px);
-  // }
+  background: #f0f0f0;
 `;
 
 const CarImage = styled.img`
@@ -53,6 +49,7 @@ const CarImage = styled.img`
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  object-position: center 80%;
 
   ${CardContainer}:hover & {
     transform: scale(1.08);
@@ -102,17 +99,7 @@ const ViewButton = styled(Link)`
   }
 `;
 
-const SoldBadge = styled.div`
-  background: #dc2626;
-  color: white;
-  text-align: center;
-  padding: 0.8rem;
-  font-weight: 600;
-  font-size: 1.1rem;
-  font-family: "Playfair Display", serif;
-  margin-top: 1rem;
-  border-radius: 8px;
-`;
+
 
 const CardContent = styled.div`
   padding: 0.8rem;
@@ -145,6 +132,7 @@ const SpecItem = styled.div`
   font-size: 0.6rem;
   font-weight: 600;
   color: #666;
+  text-transform: capitalize;
 
   svg {
     color: #dc2626;
@@ -201,6 +189,7 @@ const CarCard: React.FC<CarCardProps> = ({
         <CarTitle>
           {car.brand} {car.model}
         </CarTitle>
+
         {/* <CarDescription>{car.description}</CarDescription> */}
 
         <CarSpecs>
@@ -217,39 +206,36 @@ const CarCard: React.FC<CarCardProps> = ({
             <span>{car.fuelType}</span>
           </SpecItem>
           <SpecItem>
-            <span>{formatMileage(car.mileage.toString())} miles</span>
+            <Shield size={16} />
+            <span>{car.condition}</span>
           </SpecItem>
         </CarSpecs>
 
-        {isSold ? (
-          <SoldBadge>SOLD</SoldBadge>
-        ) : (
-          <>
-            <PriceContainer>
-              <Price>₦{car.price.toLocaleString()}</Price>
-            </PriceContainer>
+        <>
+          <PriceContainer>
+            <Price>₦{car.price.toLocaleString()}</Price>
+          </PriceContainer>
 
-            <ActionButtons>
-              <a
-                href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
-                  `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ flex: 1 }}>
-                <Button variant="primary" size="small" fullWidth>
-                  Chat
-                </Button>
-              </a>
+          <ActionButtons>
+            <a
+              href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
+                `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ flex: 1 }}>
+              <Button variant="primary" size="small" fullWidth>
+                Chat
+              </Button>
+            </a>
 
-              <Link to={`/book-inspection?car=${car._id}`}>
-                <Button variant="outline" size="small" fullWidth>
-                  Book Inspection
-                </Button>
-              </Link>
-            </ActionButtons>
-          </>
-        )}
+            <Link to={`/book-inspection?car=${car._id}`} style={{ flex: 1 }}>
+              <Button variant="outline" size="small" fullWidth>
+                Book Inspection
+              </Button>
+            </Link>
+          </ActionButtons>
+        </>
       </CardContent>
     </CardContainer>
   );

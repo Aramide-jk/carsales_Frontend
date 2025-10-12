@@ -31,7 +31,20 @@ const PageTitle = styled(motion.h1)`
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 1rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #dc2626;
+  }
 `;
 
 const PageSubtitle = styled(motion.p)`
@@ -260,7 +273,6 @@ const BookInspection: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log("hello");
 
     try {
       await api.post("/inspections", {
@@ -287,7 +299,7 @@ const BookInspection: React.FC = () => {
     "5:00 PM",
   ];
 
-  // Get tomorrow's date as minimum
+ 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const minDate = tomorrow.toISOString().split("T")[0];

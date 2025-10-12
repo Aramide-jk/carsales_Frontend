@@ -5,6 +5,8 @@ import {
   AboutContainer,
   HeroSection,
   HeroTitle,
+  HeaderOverlay,
+  HeaderContent,
   HeroSubtitle,
   HeroTagline,
   Section,
@@ -61,7 +63,7 @@ const About: React.FC = () => {
     { number: "110+", label: "Cars Sold" },
     { number: "5+", label: "Years Experience" },
     { number: "98%", label: "Client Satisfaction" },
-    { number: "50+", label: "Luxury Brands" },
+    { number: "45+", label: "Luxury Brands" },
   ];
 
   const testimonials = [
@@ -89,27 +91,33 @@ const About: React.FC = () => {
 
   return (
     <AboutContainer>
-      <HeroSection>
-        <HeroTitle
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}>
-          Excellence in Every Drive
-        </HeroTitle>
-        <HeroSubtitle
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}>
-          For over six years, we've been connecting discerning buyers with the
-          world’s finest luxury vehicles, building lasting relationships founded
-          on trust and excellence
-        </HeroSubtitle>
-        <HeroTagline
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}>
-          "Where Passion Meets Precision"
-        </HeroTagline>
+      <HeroSection
+        style={{
+          backgroundImage: `url(https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)`,
+        }}>
+        <HeaderOverlay />
+        <HeaderContent>
+          <HeroTitle
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}>
+            Excellence in Every Drive
+          </HeroTitle>
+          <HeroSubtitle
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}>
+            For over six years, we've been connecting discerning buyers with the
+            world’s finest luxury vehicles, building lasting relationships
+            founded on trust and excellence
+          </HeroSubtitle>
+          <HeroTagline
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}>
+            "Where Passion Meets Precision"
+          </HeroTagline>
+        </HeaderContent>
       </HeroSection>
 
       <Section>

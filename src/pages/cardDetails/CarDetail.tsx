@@ -252,7 +252,7 @@ const CarDetail: React.FC = () => {
                     rel="noopener noreferrer"
                     style={{ flex: 1 }}
                     className="p-8">
-                    <Button variant="primary" size="small" fullWidth>
+                    <Button variant="primary" size="large" fullWidth>
                       Chat
                     </Button>
                   </a>
