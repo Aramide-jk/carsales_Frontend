@@ -43,7 +43,6 @@ const Home: React.FC = () => {
     if (!carousel || featuredCars.length === 0) return;
 
     const scrollAmount = 320 + 16;
-    // let intervalId: NodeJS.Timeout;
     let timer: ReturnType<typeof setTimeout>;
 
     const startScrolling = () => {
