@@ -43,10 +43,11 @@ const Home: React.FC = () => {
     if (!carousel || featuredCars.length === 0) return;
 
     const scrollAmount = 320 + 16;
-    let intervalId: NodeJS.Timeout;
+    // let intervalId: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
 
     const startScrolling = () => {
-      intervalId = setInterval(() => {
+      timer = setInterval(() => {
         if (carousel) {
           if (
             carousel.scrollLeft + carousel.clientWidth >=
@@ -60,7 +61,7 @@ const Home: React.FC = () => {
       }, 2000);
     };
 
-    const stopScrolling = () => clearInterval(intervalId);
+    const stopScrolling = () => clearInterval(timer);
 
     carousel.addEventListener("mouseenter", stopScrolling);
     carousel.addEventListener("mouseleave", startScrolling);
