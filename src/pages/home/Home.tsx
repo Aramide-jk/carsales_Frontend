@@ -75,8 +75,9 @@ const Home: React.FC = () => {
     const fetchCars = async () => {
       try {
         setLoading(true);
-        const data = await getCars();
-        setFeaturedCars(data.slice(0, 10));
+        const data = await getCars(1, 10);
+        if (!data.success) throw new Error("Failed to fetch cars");
+        setFeaturedCars(data.data);
       } catch (err: any) {
         setError(err.message || "Failed to fetch cars");
       } finally {

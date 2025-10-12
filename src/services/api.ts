@@ -15,8 +15,7 @@ const base =
     : import.meta.env.VITE_BACKEND_URL ||
       "https://carsalesbackend-production.up.railway.app";
 
-console.log("🔍 Current Mode:", import.meta.env.MODE);
-console.log("🔍 API Base URL:", base);
+
 
 const api = axios.create({
   baseURL: `${base}/api`,
@@ -107,11 +106,15 @@ export const getProfile = async (): Promise<User> => {
 };
 
 // ================= CARS =================
-export const getCars = async (): Promise<Car[]> => {
-  const res = await api.get<CarAPIResponse>("/cars");
-  return res.data.data;
-};
+// export const getCars = async (): Promise<Car[]> => {
+//   const res = await api.get<CarAPIResponse>("/cars");
+//   return res.data.data;
+// };
 
+export const getCars = async (page = 1, limit = 16): Promise<CarAPIResponse> => {
+  const res = await api.get<CarAPIResponse>(`/cars?page=${page}&limit=${limit}`);
+  return res.data;
+};
 export const getSoldCars = async (): Promise<Car[]> => {
   const res = await api.get<CarAPIResponse>("/sold");
   return res.data.data;

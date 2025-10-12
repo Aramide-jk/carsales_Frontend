@@ -1,4 +1,4 @@
-import  { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import CarCard from "../../components/CarCard";
@@ -28,8 +28,10 @@ import {
   SortContainer,
   SortLabel,
   PaginationContainer,
-  PageButton
+  PageButton,
 } from "./cars.styles";
+
+import { getCars } from "../../services/api";
 
 const Cars = () => {
   useAuth();
@@ -48,22 +50,16 @@ const Cars = () => {
   const [priceFilter, setPriceFilter] = useState("");
   const [transmissionFilter, setTransmissionFilter] = useState("");
   const [sortBy, setSortBy] = useState("brand");
-  const carsPerPage = 16; 
+  const carsPerPage = 16;
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
         setLoading(true);
-        const res = await fetch(
-          `/api/cars?page=${currentPage}&limit=${carsPerPage}`
-        );
-        const data = await res.json();
-
+        const data = await getCars(currentPage, carsPerPage);
         if (!data.success) throw new Error("Failed to fetch cars");
-
         setCars(data.data);
         setTotalPages(data.totalPages);
-        setTotalCars(data.totalCars);
       } catch (err: any) {
         setError(err.message || "Failed to fetch cars");
       } finally {
@@ -75,14 +71,12 @@ const Cars = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage, carsPerPage]);
 
-
   const brands = [...new Set(cars.map((car) => car.brand))].sort();
   const years = [...new Set(cars.map((car) => car.year))].sort((a, b) => b - a);
   const transmissions = [
     ...new Set(cars.map((car) => car.transmission)),
   ].sort();
 
- 
   const filteredAndSortedCars = useMemo(() => {
     let filtered = cars.filter((car) => {
       const matchesSearch =
@@ -341,4 +335,3 @@ const Cars = () => {
 };
 
 export default Cars;
-

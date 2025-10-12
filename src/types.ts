@@ -82,6 +82,8 @@ export interface CarAPIResponse {
   success: boolean;
   count: number;
   data: Car[];
+  totalCars: number;
+  totalPages: number;
 }
 
 export interface SingleCarAPIResponse {
