@@ -11,6 +11,7 @@ import {
   User,
 } from "lucide-react";
 import Button from "../../components/Button";
+import { sendContactMessage } from "../../services/api";
 import {
   ContactContainer,
   ContentWrapper,
@@ -40,11 +41,12 @@ import {
   Input,
   TextArea,
   SuccessMessage,
+  ErrorMessage,
 } from "./contact.styles";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     phone: "",
     subject: "",
@@ -52,6 +54,7 @@ const Contact: React.FC = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -65,11 +68,16 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setIsSubmitted(true);
-    setIsLoading(false);
+    setError(null);
+    try {
+      await sendContactMessage(formData);
+      setIsSubmitted(true);
+    } catch (err) {
+      setError("Failed to send message. Please try again later.");
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const contactInfo = [
@@ -169,100 +177,103 @@ const Contact: React.FC = () => {
                   </p>
                 </SuccessMessage>
               ) : (
-                <Form onSubmit={handleSubmit}>
-                  <FormRow>
+                <>
+                  <Form onSubmit={handleSubmit}>
+                    <FormRow>
+                      <FormGroup>
+                        <Label htmlFor="name">
+                          <User size={16} />
+                          Full Name
+                        </Label>
+                        <Input
+                          type="text"
+                          id="fullName"
+                          name="fullName"
+                          placeholder="Enter your full name"
+                          value={formData.fullName}
+                          onChange={handleChange}
+                          required
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label htmlFor="email">
+                          <Mail size={16} />
+                          Email
+                        </Label>
+                        <Input
+                          type="email"
+                          id="email"
+                          name="email"
+                          placeholder="Enter your email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                        />
+                      </FormGroup>
+                    </FormRow>
+
+                    <FormRow>
+                      <FormGroup>
+                        <Label htmlFor="phone">
+                          <Phone size={16} />
+                          Phone
+                        </Label>
+                        <Input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          placeholder="Enter your phone number"
+                          value={formData.phone}
+                          onChange={handleChange}
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label htmlFor="subject">Subject</Label>
+                        <Input
+                          type="text"
+                          id="subject"
+                          name="subject"
+                          placeholder="What's this about?"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          required
+                        />
+                      </FormGroup>
+                    </FormRow>
+
                     <FormGroup>
-                      <Label htmlFor="name">
-                        <User size={16} />
-                        Full Name
+                      <Label htmlFor="message">
+                        <MessageCircle size={16} />
+                        Message
                       </Label>
-                      <Input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Enter your full name"
-                        value={formData.name}
+                      <TextArea
+                        id="message"
+                        name="message"
+                        placeholder="Tell us how we can help you..."
+                        value={formData.message}
                         onChange={handleChange}
                         required
                       />
                     </FormGroup>
-                    <FormGroup>
-                      <Label htmlFor="email">
-                        <Mail size={16} />
-                        Email
-                      </Label>
-                      <Input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Enter your email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                      />
-                    </FormGroup>
-                  </FormRow>
 
-                  <FormRow>
-                    <FormGroup>
-                      <Label htmlFor="phone">
-                        <Phone size={16} />
-                        Phone
-                      </Label>
-                      <Input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="Enter your phone number"
-                        value={formData.phone}
-                        onChange={handleChange}
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label htmlFor="subject">Subject</Label>
-                      <Input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        placeholder="What's this about?"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                      />
-                    </FormGroup>
-                  </FormRow>
-
-                  <FormGroup>
-                    <Label htmlFor="message">
-                      <MessageCircle size={16} />
-                      Message
-                    </Label>
-                    <TextArea
-                      id="message"
-                      name="message"
-                      placeholder="Tell us how we can help you..."
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                    />
-                  </FormGroup>
-
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="large"
-                    fullWidth
-                    disabled={isLoading}>
-                    {isLoading ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        <Send size={18} />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-                </Form>
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      size="large"
+                      fullWidth
+                      disabled={isLoading}>
+                      {isLoading ? (
+                        "Sending..."
+                      ) : (
+                        <>
+                          <Send size={18} />
+                          Send Message
+                        </>
+                      )}
+                    </Button>
+                    {error && <ErrorMessage>{error}</ErrorMessage>}
+                  </Form>
+                </>
               )}
             </FormCard>
           </ContactForm>

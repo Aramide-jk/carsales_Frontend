@@ -127,7 +127,7 @@ export const FeaturedCarsCarousel = styled.div`
   margin-bottom: 2rem;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  // scrollbar-color: #dc2626 rgba(220, 38, 38, 0.1);
+  scrollbar-color: #dc2626 rgba(220, 38, 38, 0.1);
   scrollbar-color: #dc2626 rgba(220, 38, 38, 0.1);
 
   &::-webkit-scrollbar {

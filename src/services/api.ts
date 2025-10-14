@@ -208,6 +208,28 @@ export const updatePurchaseStatus = async (
   return res.data.data;
 };
 
+export const sendContactMessage = async (contactData: {
+  fullName: string;
+  email: string;
+  phone?: string;
+  subject: string;
+  message: string;
+}): Promise<any> => {
+  const res = await api.post("/contact", contactData);
+  return res.data;
+};
+
+// export const sendContactMessage = async (contactData: {
+//   fullName: string;
+//   email: string;
+//   phone?: string;
+//   subject: string;
+//   message: string;
+// }): Promise<any> => {
+//   const res = await api.post("/contact", contactData);
+//   return res.data;
+// };
+
 export default api;
 
 // const base = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";

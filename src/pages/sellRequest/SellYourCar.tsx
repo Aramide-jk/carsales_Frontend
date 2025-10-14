@@ -64,7 +64,6 @@ import {
   NavigationButtons,
   Form,
   SuccessMessage,
- 
 } from "./sell.styles";
 
 interface UploadedFile {
@@ -898,7 +897,7 @@ const SellYourCar: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}>
-            Sell Your Luxury Car
+            Sell My Luxury Car
           </PageTitle>
           <PageSubtitle
             initial={{ opacity: 0, y: 20 }}

@@ -299,3 +299,13 @@ export const SuccessMessage = styled(motion.div)`
     line-height: 1.6;
   }
 `;
+
+export const ErrorMessage = styled.div`
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+`;

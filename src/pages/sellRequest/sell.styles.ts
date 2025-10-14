@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-
-
 export const SellCarContainer = styled.div`
   min-height: 100vh;
   padding-top: 50px;
@@ -35,7 +33,7 @@ export const HeaderContent = styled.div`
 
 export const PageTitle = styled(motion.h1)`
   font-family: "Playfair Display", serif;
-  font-size: 1.5rem
+  font-size: 2.5rem;
   font-weight: 600;
   color: white;
   margin-bottom: 1.5rem;
@@ -51,9 +49,8 @@ export const PageTitle = styled(motion.h1)`
     width: 60px;
     height: 3px;
     background: #dc2626;
-    
   }
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
     font-size: 2rem;
   }
 `;

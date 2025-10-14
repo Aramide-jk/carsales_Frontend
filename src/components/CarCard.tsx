@@ -39,7 +39,7 @@ const CardContainer = styled(motion.div)`
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 14 / 16;
   overflow: hidden;
   background: #f0f0f0;
 `;
