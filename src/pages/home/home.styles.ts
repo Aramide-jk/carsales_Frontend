@@ -127,6 +127,7 @@ export const FeaturedCarsCarousel = styled.div`
   margin-bottom: 2rem;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
+  // scrollbar-color: #dc2626 rgba(220, 38, 38, 0.1);
   scrollbar-color: #dc2626 rgba(220, 38, 38, 0.1);
 
   &::-webkit-scrollbar {
@@ -141,11 +142,11 @@ export const FeaturedCarsCarousel = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: #dc2626;
     border-radius: 10px;
-    border: 2px solid rgba(220, 38, 38, 0.05);
+    border: 1px solid rgba(220, 38, 38, 0.05);
   }
 
   & > div {
-    flex: 0 0 320px;
+    flex: 0 0 250px;
   }
 `;
 

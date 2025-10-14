@@ -23,6 +23,7 @@ import SoldCars from "./pages/sold/SoldCars";
 import Features from "./pages/features/Features";
 import SellYourCar from "./pages/sellRequest/SellYourCar";
 import SignUp from "./pages/signup/SignUp";
+import Profile from "./pages/profile/Profile";
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -56,6 +57,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="signup" element={<SignUp />} />
+                <Route path="/profile" element={<Profile />} />
               </Routes>
             </AnimatePresence>
           </MainContent>

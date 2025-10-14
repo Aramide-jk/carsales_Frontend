@@ -35,6 +35,16 @@ export interface InspectionBooking {
   inspectionTime: string;
   status: "pending" | "confirmed" | "completed" | "cancelled";
   createdAt: string;
+ 
+
+  time: string;
+  date: string;
+  car: string | {
+  brand: string;
+  model: string;
+  year: number | string;
+  location?: string;
+};
 }
 
 export interface SellRequest {

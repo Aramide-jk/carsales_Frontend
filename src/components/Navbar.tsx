@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { Home, Car, Tag, Info, User, Phone } from "lucide-react";
 
-const NavContainer = styled(motion.nav)<{ $isScrolled: boolean }>`
+const NavContainer = styled.nav<{ $hidden: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  background: ${(props) =>
-    props.$isScrolled ? "rgba(248, 247, 244, 0.75)" : "white"};
-  color: ${(props) => (props.$isScrolled ? "black" : "black")};
-  border-bottom: ${(props) =>
-    props.$isScrolled ? "1px solid rgba(220, 38, 38, 0.1)" : "none"};
-  transition: background 0.3s ease, color 0.3s ease, border-bottom 0.3s ease;
-
+  background: rgba(255, 255, 255, 0.98);
+  // backdrop-filter: blur(10px);
+  // transition: all 0.5s ease;
+  transition: transform 0.5s ease-in-out;
+  transform: ${(props) =>
+    props.$hidden ? "translateX(100%)" : "translateY(0)"};
+  // z-index: 999;
   @media (max-width: 768px) {
     padding: 0.8rem 0;
     background: rgba(255, 255, 255, 0.8);
@@ -31,7 +29,7 @@ const NavContainer = styled(motion.nav)<{ $isScrolled: boolean }>`
 const NavWrapper = styled.div`
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0.5rem;
+  // padding: 0.5rem;
 
   @media (max-width: 768px) {
     display: flex;
@@ -155,23 +153,23 @@ const SignInButton = styled(Link)`
   }
 `;
 
-const LogoutButton = styled.button`
-  background: transparent;
-  color: #dc2626;
-  padding: 0.8rem 1.5rem;
-  border: 2px solid #dc2626;
-  border-radius: 16px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  cursor: pointer;
+// const LogoutButton = styled.button`
+//   background: transparent;
+//   color: #dc2626;
+//   padding: 0.8rem 1.5rem;
+//   border: 2px solid #dc2626;
+//   border-radius: 16px;
+//   font-weight: 600;
+//   transition: all 0.3s ease;
+//   cursor: pointer;
 
-  &:hover {
-    background: #dc2626;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
-  }
-`;
+//   &:hover {
+//     background: #dc2626;
+//     color: white;
+//     transform: translateY(-2px);
+//     box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+//   }
+// `;
 
 const BottomNav = styled.nav<{ $hidden: boolean }>`
   display: none;
@@ -190,7 +188,7 @@ const BottomNav = styled.nav<{ $hidden: boolean }>`
     padding: 0.5rem 0;
     transition: transform 0.3s ease-in-out;
     transform: ${(props) =>
-      props.$hidden ? "translateY(100%)" : "translateY(0)"};
+      props.$hidden ? "translateX(100%)" : "translateY(0)"};
     z-index: 999;
   }
 `;
@@ -218,13 +216,13 @@ const BottomNavItem = styled(Link)<{ $active: boolean }>`
 
 // === NAVBAR COMPONENT === //
 const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [_, setIsScrolled] = useState(false);
   const [isBottomNavHidden, setIsBottomNavHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const { token, logout } = useAuth();
+  const { token } = useAuth();
   const isSignedIn = !!token;
 
   useEffect(() => {
@@ -243,10 +241,10 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/signin");
-  };
+  // const handleLogout = () => {
+  //   logout();
+  //   navigate("/signin");
+  // };
 
   const navItems = [
     { path: "/", label: "Home" },
@@ -273,11 +271,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <NavContainer
-        $isScrolled={isScrolled}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}>
+      <NavContainer $hidden={isBottomNavHidden}>
         <NavWrapper>
           <Logo to="/">
             <span className="logo-text">jk</span> _Autos
@@ -300,14 +294,13 @@ const Navbar: React.FC = () => {
 
           <NavButtons>
             {isSignedIn ? (
-              <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
+              <SignInButton to="/profile">Profile</SignInButton>
             ) : (
               <SignInButton to="/signin">Sign In</SignInButton>
             )}
           </NavButtons>
         </NavContent>
       </NavContainer>
-
       {/* Mobile Bottom Navigation */}
       <BottomNav $hidden={isBottomNavHidden}>
         {mobileNavItems.map((item) => (

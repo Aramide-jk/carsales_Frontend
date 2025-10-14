@@ -231,13 +231,13 @@ export const CarTitle = styled(motion.h1)`
   text-transform: capitalize;
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
   }
 `;
 
 export const CarPrice = styled(motion.div)`
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #dc2626;
   font-family: "Playfair Display", serif;
   margin-bottom: 1rem;
@@ -272,6 +272,7 @@ export const SpecItem = styled.div`
   padding: 1rem;
   background: rgba(220, 38, 38, 0.05);
   border-radius: 12px;
+  text-transform: capitalize;
 
   @media (max-width: 480px) {
     padding: 0.5rem;

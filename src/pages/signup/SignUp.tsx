@@ -50,7 +50,11 @@ const SignUp: React.FC = () => {
       await signUp(formData);
       setIsSignedUp(true);
     } catch (err: any) {
-      setError(err.message || "An error occurred during sign-up.");
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }

@@ -99,8 +99,6 @@ const ViewButton = styled(Link)`
   }
 `;
 
-
-
 const CardContent = styled.div`
   padding: 0.8rem;
 `;
@@ -110,7 +108,12 @@ const CarTitle = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
   color: #1a1a1a;
+  text-transform: capitalize;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const CarSpecs = styled.div`
@@ -129,13 +132,17 @@ const SpecItem = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.6rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #666;
   text-transform: capitalize;
 
   svg {
     color: #dc2626;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
   }
 `;
 
@@ -151,6 +158,10 @@ const Price = styled.div`
   font-weight: 500;
   color: #dc2626;
   font-family: "Playfair Display", serif;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const ActionButtons = styled.div`

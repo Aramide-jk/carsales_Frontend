@@ -52,7 +52,13 @@ const SignIn: React.FC = () => {
       login(response.token);
       setIsSignedIn(true);
     } catch (err: any) {
-      setError(err.message || "An error occurred during sign-in.");
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else if (err.request) {
+        setError("Network error. Please check your connection and try again.");
+      } else {
+        setError("An unexpected error occurred during sign-in.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -60,8 +66,7 @@ const SignIn: React.FC = () => {
 
   useEffect(() => {
     if (isSignedIn) {
-      // Redirect after a short delay to show the success message
-      setTimeout(() => navigate("/"), 3000);
+      setTimeout(() => navigate("/"), 1000);
     }
   }, [isSignedIn, navigate]);
 

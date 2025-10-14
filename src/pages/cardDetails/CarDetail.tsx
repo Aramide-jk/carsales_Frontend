@@ -58,7 +58,13 @@ const CarDetail: React.FC = () => {
         const data = await getCarById(id!);
         setCar(data);
       } catch (err: any) {
-        setError(err.message || "Failed to fetch car");
+        if (err.response) {
+          setError(err.response.data.message || "Could not fetch car details.");
+        } else if (err.request) {
+          setError("Network error. Please check your connection.");
+        } else {
+          setError("An unexpected error occurred while fetching the car.");
+        }
       } finally {
         setLoading(false);
       }
@@ -67,14 +73,11 @@ const CarDetail: React.FC = () => {
     if (id) fetchCar();
   }, [id]);
 
-  if (loading) return <p>Loading car...</p>;
-  if (error) return <p>{error}</p>;
-
   if (loading) {
     return (
       <DetailContainer>
         <NotFound>
-          <h2>Loading...</h2>
+          <h2>Loading Car Details...</h2>
         </NotFound>
       </DetailContainer>
     );
@@ -84,7 +87,10 @@ const CarDetail: React.FC = () => {
       <DetailContainer>
         <NotFound>
           <h2>Car Not Found</h2>
-          <p>The car you're looking for doesn't exist or has been removed.</p>
+          <p>
+            {error ||
+              "The car you're looking for doesn't exist or has been removed."}
+          </p>
           <Link to="/cars">
             <Button variant="primary">View All Cars</Button>
           </Link>

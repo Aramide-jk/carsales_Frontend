@@ -79,7 +79,13 @@ const Home: React.FC = () => {
         if (!data.success) throw new Error("Failed to fetch cars");
         setFeaturedCars(data.data);
       } catch (err: any) {
-        setError(err.message || "Failed to fetch cars");
+        if (err.response) {
+          setError(err.response.data.message || "Could not fetch cars.");
+        } else if (err.request) {
+          setError("Network error. Please check your connection.");
+        } else {
+          setError("An unexpected error occurred.");
+        }
       } finally {
         setLoading(false);
       }
@@ -88,8 +94,18 @@ const Home: React.FC = () => {
     fetchCars();
   }, []);
 
-  if (loading) return <p>Loading cars...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (loading)
+    return (
+      <div style={{ textAlign: "center", padding: "5rem" }}>
+        Loading featured cars...
+      </div>
+    );
+  if (error)
+    return (
+      <div style={{ textAlign: "center", padding: "5rem", color: "red" }}>
+        Error: {error}
+      </div>
+    );
 
   const features = [
     {
