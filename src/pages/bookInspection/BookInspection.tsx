@@ -231,6 +231,36 @@ const SelectedCarPrice = styled.p`
   margin: 0;
 `;
 
+const InfoCard = styled.div`
+  background: rgba(220, 38, 38, 0.05);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  
+  h4 {
+    font-family: 'Playfair Display', serif;
+    color: #1A1A1A;
+    margin-bottom: 1rem;
+  }
+  
+  ul {
+    list-style: none;
+    
+    li {
+      padding: 0.5rem 0;
+      color: #666;
+      
+      &::before {
+        content: '✓';
+        color: #DC2626;
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+`;
+
+
 // ---------- COMPONENT ----------
 
 const BookInspection: React.FC = () => {
@@ -358,10 +388,22 @@ const BookInspection: React.FC = () => {
       </HeaderSection>
 
       <FormSection>
+       
         <FormContainer
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}>
+             <InfoCard>
+            <h4>What's Included in Your Inspection</h4>
+            <ul>
+              <li>Comprehensive 150-point quality check</li>
+              <li>Engine and transmission diagnostics</li>
+              <li>Interior and exterior condition assessment</li>
+              <li>Test drive with our expert technician</li>
+              <li>Detailed inspection report</li>
+              <li>Personalized consultation session</li>
+            </ul>
+          </InfoCard>
           {selectedCarDetails && (
             <SelectedCarContainer layout>
               <SelectedCarImage
@@ -379,6 +421,7 @@ const BookInspection: React.FC = () => {
               </SelectedCarInfo>
             </SelectedCarContainer>
           )}
+          
 
           <Form onSubmit={handleSubmit}>
             <FormGroup>
