@@ -249,8 +249,9 @@ export const SortLabel = styled.span`
 
 export const CarsGrid = styled.div`
   display: grid;
-  // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  // grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   margin-bottom: 3rem;
 

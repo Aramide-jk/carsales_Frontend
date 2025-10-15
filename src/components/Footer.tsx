@@ -10,6 +10,7 @@ import {
   Instagram,
   Facebook,
   Twitter,
+  GlassWater,
 } from "lucide-react";
 
 const FooterContainer = styled.footer`
@@ -151,6 +152,12 @@ const FooterBottom = styled.div`
   font-size: 0.9rem;
 `;
 
+const DesignCredit = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+`;
+
 const Footer: React.FC = () => {
   return (
     <FooterContainer>
@@ -231,8 +238,8 @@ const Footer: React.FC = () => {
 
         <FooterBottom>
           <p>
-            &copy; 2024 jk_Autos. All rights reserved. | Privacy Policy | Terms
-            of Service
+            &copy; {new Date().getFullYear()} jk_Autos. All rights reserved. |{" "}
+            <DesignCredit>Designed with care❣️</DesignCredit>
           </p>
         </FooterBottom>
       </FooterContent>

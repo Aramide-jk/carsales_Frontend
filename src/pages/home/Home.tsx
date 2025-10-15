@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Award, Zap, Users } from "lucide-react";
+import styled from "styled-components";
 import Button from "../../components/Button";
 import CarCard from "../../components/CarCard";
 import { getCars } from "../../services/api";
@@ -29,6 +30,39 @@ import {
   FeatureTitle,
   FeatureDescription,
 } from "./home.styles";
+
+const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+`;
+
+const Spinner = styled.div`
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-left-color: #dc2626;
+  animation: spin 1s ease infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+const LoadingText = styled.p`
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 500;
+`;
 
 // import api from "../services/api";
 
@@ -94,18 +128,17 @@ const Home: React.FC = () => {
     fetchCars();
   }, []);
 
-  if (loading)
+  if (loading) {
     return (
-      <div style={{ textAlign: "center", padding: "5rem" }}>
-        Loading featured cars...
-      </div>
+      <LoadingContainer>
+        <Spinner />
+        <LoadingText>Loading featured cars...</LoadingText>
+      </LoadingContainer>
     );
-  if (error)
-    return (
-      <div style={{ textAlign: "center", padding: "5rem", color: "red" }}>
-        Error: {error}
-      </div>
-    );
+  }
+  if (error) {
+    return <LoadingContainer>Error: {error}</LoadingContainer>;
+  }
 
   const features = [
     {

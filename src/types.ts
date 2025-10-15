@@ -35,16 +35,17 @@ export interface InspectionBooking {
   inspectionTime: string;
   status: "pending" | "confirmed" | "completed" | "cancelled";
   createdAt: string;
- 
 
   time: string;
   date: string;
-  car: string | {
-  brand: string;
-  model: string;
-  year: number | string;
-  location?: string;
-};
+  car:
+    | string
+    | {
+        brand: string;
+        model: string;
+        year: number | string;
+        location?: string;
+      };
 }
 
 export interface SellRequest {
@@ -104,6 +105,7 @@ export interface SingleCarAPIResponse {
 export interface User {
   _id: string;
   email: string;
-  name: string;
+  name: string; 
+  phone?: string; 
   role: "admin" | "user";
 }
