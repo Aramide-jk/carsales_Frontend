@@ -28,6 +28,7 @@ import {
   FeatureItem,
   ActionButtons,
   NotFound,
+  SoldLabel,
 } from "../cardDetails/carDetails.styles";
 import { motion } from "framer-motion";
 import {
@@ -197,12 +198,21 @@ const CarDetail: React.FC = () => {
                   {car.brand} {car.model}
                 </CarTitle>
 
-                <CarPrice
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}>
-                  ₦{car.price.toLocaleString()}
-                </CarPrice>
+                {car.status === "sold" ? (
+                  <SoldLabel
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}>
+                    SOLD
+                  </SoldLabel>
+                ) : (
+                  <CarPrice
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}>
+                    ₦{car.price.toLocaleString()}
+                  </CarPrice>
+                )}
 
                 <CarDescription
                   initial={{ opacity: 0, y: 20 }}
@@ -245,33 +255,35 @@ const CarDetail: React.FC = () => {
                 </FeaturesSection>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}>
-                <ActionButtons>
-                  <a
-                    href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
-                      `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ flex: 1 }}
-                    className="p-8">
-                    <Button variant="primary" size="large" fullWidth>
-                      Chat
-                    </Button>
-                  </a>
+              {car.status !== "sold" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}>
+                  <ActionButtons>
+                    <a
+                      href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
+                        `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ flex: 1 }}
+                      className="p-8">
+                      <Button variant="primary" size="large" fullWidth>
+                        Chat
+                      </Button>
+                    </a>
 
-                  <Link
-                    to={`/book-inspection?car=${car._id}`}
-                    style={{ flex: 1 }}>
-                    <Button variant="outline" size="large" fullWidth>
-                      Book Inspection
-                    </Button>
-                  </Link>
-                </ActionButtons>
-              </motion.div>
+                    <Link
+                      to={`/book-inspection?car=${car._id}`}
+                      style={{ flex: 1 }}>
+                      <Button variant="outline" size="large" fullWidth>
+                        Book Inspection
+                      </Button>
+                    </Link>
+                  </ActionButtons>
+                </motion.div>
+              )}
             </InfoSection>
           </CarDetailGrid>
         </ContentWrapper>

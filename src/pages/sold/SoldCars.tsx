@@ -171,7 +171,7 @@ const ResultsCount = styled.p`
 
 const CarsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 
   @media (max-width: 768px) {
@@ -208,7 +208,6 @@ const SoldCars: React.FC = () => {
         setLoading(true);
         const data = await getSoldCars();
         setSoldCars(data);
-        console.log(data);
       } catch (err: any) {
         setError(err.message || "Failed to fetch cars");
       } finally {

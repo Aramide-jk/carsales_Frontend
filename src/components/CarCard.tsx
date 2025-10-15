@@ -39,14 +39,16 @@ const CardContainer = styled(motion.div)`
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 14 / 16;
+  // height: 100%;
+  // aspect-ratio: 14 /16;
   overflow: hidden;
   background: #f0f0f0;
 `;
 
 const CarImage = styled.img`
   width: 100%;
-  height: 100%;
+  // height: 50%;
+  aspect-ratio: 16 /16;
   object-fit: cover;
   transition: transform 0.5s ease;
   object-position: center 80%;
@@ -133,7 +135,7 @@ const SpecItem = styled.div`
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 400;
   color: #666;
   text-transform: capitalize;
 
@@ -143,6 +145,7 @@ const SpecItem = styled.div`
 
   @media (max-width: 768px) {
     font-size: 0.7rem;
+    font-weight: 500;
   }
 `;
 
@@ -162,6 +165,13 @@ const Price = styled.div`
   @media (max-width: 768px) {
     font-size: 1rem;
   }
+`;
+
+const SoldLabel = styled.div`
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #dc2626;
+  font-family: "Playfair Display", serif;
 `;
 
 const ActionButtons = styled.div`
@@ -187,10 +197,10 @@ const CarCard: React.FC<CarCardProps> = ({
         <CarImage
           src={car.images[0]}
           alt={car.brand}
-          style={{ filter: isSold ? "grayscale(80%)" : "none" }}
+          style={{ filter: isSold ? "" : "none" }}
         />
         <ImageOverlay />
-        <ViewButton to={isSold ? `/sold-cars` : `/cars/${car._id}`}>
+        <ViewButton to={`/cars/${car._id}`}>
           <Eye size={16} />
           View
         </ViewButton>
@@ -222,31 +232,37 @@ const CarCard: React.FC<CarCardProps> = ({
           </SpecItem>
         </CarSpecs>
 
-        <>
+        {isSold ? (
           <PriceContainer>
-            <Price>₦{car.price.toLocaleString()}</Price>
+            <SoldLabel>SOLD</SoldLabel>
           </PriceContainer>
+        ) : (
+          <>
+            <PriceContainer>
+              <Price>₦{car.price.toLocaleString()}</Price>
+            </PriceContainer>
 
-          <ActionButtons>
-            <a
-              href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
-                `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ flex: 1 }}>
-              <Button variant="primary" size="small" fullWidth>
-                Chat
-              </Button>
-            </a>
+            <ActionButtons>
+              <a
+                href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
+                  `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ flex: 1 }}>
+                <Button variant="primary" size="small" fullWidth>
+                  Chat
+                </Button>
+              </a>
 
-            <Link to={`/book-inspection?car=${car._id}`} style={{ flex: 1 }}>
-              <Button variant="outline" size="small" fullWidth>
-                Book Inspection
-              </Button>
-            </Link>
-          </ActionButtons>
-        </>
+              <Link to={`/book-inspection?car=${car._id}`} style={{ flex: 1 }}>
+                <Button variant="outline" size="small" fullWidth>
+                  Book Inspection
+                </Button>
+              </Link>
+            </ActionButtons>
+          </>
+        )}
       </CardContent>
     </CardContainer>
   );

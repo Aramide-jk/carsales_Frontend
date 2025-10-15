@@ -61,19 +61,21 @@ export const ImageSection = styled.div`
 export const MainImageContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 2000px;
+  max-width: 1800px;
+
   // border-radius: 20px;
   overflow: hidden;
   margin-bottom: 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 `;
 
 export const MainImage = styled.img`
   width: 100%;
-  height: 10%;
+  // height: 50%;
+  aspect-ratio: 10/8;
   object-fit: cover;
   border-radius: 10px;
-  background-color: #f8f7f4;
+  // background-color: #f8f7f4;
 
   @media (max-width: 480px) {
     border-radius: 0;
@@ -363,5 +365,21 @@ export const NotFound = styled.div`
     color: #666;
     font-size: 1.1rem;
     margin-bottom: 2rem;
+  }
+`;
+
+//   font-family: "Playfair Display", serif;
+//   margin-bottom: 1rem;
+
+//   @media (max-width: 768px) {
+//     font-size: 1.5rem;
+//   }
+// `;
+
+export const SoldLabel = styled(CarPrice)`
+  font-weight: 700;
+  color: #dc2626;
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
   }
 `;

@@ -210,7 +210,7 @@ const Home: React.FC = () => {
               <div
                 className="box-background"
                 style={{
-                  backgroundImage: `url(https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=800)`,
+                  backgroundImage: `url(https://i.pinimg.com/736x/6f/2c/9e/6f2c9ed9bb47c670c445d890080830c3.jpg)`,
                 }}
               />
               <div>
@@ -222,7 +222,7 @@ const Home: React.FC = () => {
               <div
                 className="box-background"
                 style={{
-                  backgroundImage: `url(https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=800)`,
+                  backgroundImage: `url(https://i.pinimg.com/736x/2f/30/03/2f3003335fa848a42d13debeadada944.jpg)`,
                 }}
               />
               <div>
@@ -234,7 +234,7 @@ const Home: React.FC = () => {
               <div
                 className="box-background"
                 style={{
-                  backgroundImage: `url(https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)`,
+                  backgroundImage: `url(https://i.pinimg.com/736x/cc/9a/91/cc9a91360fd779cecc099543b4696da9.jpg)`,
                 }}
               />
               <div>
