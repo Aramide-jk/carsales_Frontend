@@ -255,25 +255,24 @@ const CarDetail: React.FC = () => {
                 </FeaturesSection>
               </motion.div>
 
-              {car.status !== "sold" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}>
-                  <ActionButtons>
-                    <a
-                      href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
-                        `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ flex: 1 }}
-                      className="p-8">
-                      <Button variant="primary" size="large" fullWidth>
-                        Chat
-                      </Button>
-                    </a>
-
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}>
+                <ActionButtons>
+                  <a
+                    href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
+                      `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ flex: 1 }}
+                    className="p-8">
+                    <Button variant="primary" size="large" fullWidth>
+                      Chat
+                    </Button>
+                  </a>
+                  {car.status !== "sold" && (
                     <Link
                       to={`/book-inspection?car=${car._id}`}
                       style={{ flex: 1 }}>
@@ -281,9 +280,9 @@ const CarDetail: React.FC = () => {
                         Book Inspection
                       </Button>
                     </Link>
-                  </ActionButtons>
-                </motion.div>
-              )}
+                  )}
+                </ActionButtons>
+              </motion.div>
             </InfoSection>
           </CarDetailGrid>
         </ContentWrapper>
