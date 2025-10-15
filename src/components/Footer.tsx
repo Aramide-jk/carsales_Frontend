@@ -10,7 +10,6 @@ import {
   Instagram,
   Facebook,
   Twitter,
-  GlassWater,
 } from "lucide-react";
 
 const FooterContainer = styled.footer`
