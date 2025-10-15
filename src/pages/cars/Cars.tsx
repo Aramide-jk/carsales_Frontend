@@ -29,6 +29,9 @@ import {
   SortLabel,
   PaginationContainer,
   PageButton,
+  LoadingContainer,
+  Spinner,
+  LoadingText,
 } from "./cars.styles";
 
 import { getCars } from "../../services/api";
@@ -41,7 +44,7 @@ const Cars = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalCars, _] = useState(0);
+  const [totalCars, setTotalCars] = useState(0);
 
   // Filters
   const [searchTerm, setSearchTerm] = useState("");
@@ -60,6 +63,7 @@ const Cars = () => {
         if (!data.success) throw new Error("Failed to fetch cars");
         setCars(data.data);
         setTotalPages(data.totalPages);
+        setTotalCars(data.totalCars);
       } catch (err: any) {
         setError(err.message || "Failed to fetch cars");
       } finally {
@@ -162,9 +166,10 @@ const Cars = () => {
   if (loading) {
     return (
       <CarsContainer>
-        <ResultsSection>
-          <ResultsCount>Loading cars...</ResultsCount>
-        </ResultsSection>
+        <LoadingContainer>
+          <Spinner />
+          <LoadingText>Loading cars...</LoadingText>
+        </LoadingContainer>
       </CarsContainer>
     );
   }
