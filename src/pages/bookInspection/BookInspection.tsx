@@ -285,10 +285,12 @@ const BookInspection: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await api.post("/inspections", {
-        ...formData,
-        car: formData.selectedCar,
-      });
+      const { selectedCar, ...rest } = formData;
+      const payload = {
+        ...rest,
+        car: selectedCar,
+      };
+      await api.post("/inspections", payload);
       setIsSubmitted(true);
     } catch (err) {
       alert("Failed to book inspection. Please try again.");
