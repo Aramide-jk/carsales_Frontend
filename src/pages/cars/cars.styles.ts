@@ -215,7 +215,7 @@ export const ResultsSection = styled.section`
   // margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 2rem;
   }
 `;
 
