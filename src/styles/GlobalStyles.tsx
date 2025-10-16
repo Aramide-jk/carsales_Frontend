@@ -15,9 +15,10 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    // background-color: #F8F7F4;
+    background-color: #F8F7F4;
     color: #2B2B2B;
     line-height: 1.6;
+     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 

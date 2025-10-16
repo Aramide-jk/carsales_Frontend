@@ -1,7 +1,9 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
+import { RotateCcw } from "lucide-react";
 
 import CarCard from "../../components/CarCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import Button from "../../components/Button";
 // import { getCars } from "../../services/api";
 // import type { Car } from "../../types";
@@ -12,9 +14,7 @@ import {
   HeaderSection,
   FiltersSection,
   FiltersContainer,
-  SearchContainer,
-  SearchIcon,
-  SearchInput,
+  // SearchContainer,
   FilterGroup,
   FilterSelect,
   ClearFiltersButton,
@@ -29,9 +29,6 @@ import {
   SortLabel,
   PaginationContainer,
   PageButton,
-  LoadingContainer,
-  Spinner,
-  LoadingText,
 } from "./cars.styles";
 
 import { getCars } from "../../services/api";
@@ -47,13 +44,10 @@ const Cars = () => {
   const [totalCars, setTotalCars] = useState(0);
 
   // Filters
-  const [searchTerm, setSearchTerm] = useState("");
   const [brandFilter, setBrandFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
-  const [priceFilter, setPriceFilter] = useState("");
-  const [transmissionFilter, setTransmissionFilter] = useState("");
   const [sortBy, setSortBy] = useState("brand");
-  const carsPerPage = 16;
+  const carsPerPage = 2;
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -77,47 +71,13 @@ const Cars = () => {
 
   const brands = [...new Set(cars.map((car) => car.brand))].sort();
   const years = [...new Set(cars.map((car) => car.year))].sort((a, b) => b - a);
-  const transmissions = [
-    ...new Set(cars.map((car) => car.transmission)),
-  ].sort();
 
   const filteredAndSortedCars = useMemo(() => {
     let filtered = cars.filter((car) => {
-      const matchesSearch =
-        car.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        car.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        car.description.toLowerCase().includes(searchTerm.toLowerCase());
-
       const matchesBrand = !brandFilter || car.brand === brandFilter;
       const matchesYear = !yearFilter || car.year.toString() === yearFilter;
-      const matchesTransmission =
-        !transmissionFilter || car.transmission === transmissionFilter;
 
-      let matchesPrice = true;
-      if (priceFilter) {
-        switch (priceFilter) {
-          case "under-5000000":
-            matchesPrice = car.price < 5000000;
-            break;
-          case "5000000-10000000":
-            matchesPrice = car.price >= 5000000 && car.price < 10000000;
-            break;
-          case "10000000-15000000":
-            matchesPrice = car.price >= 10000000 && car.price < 15000000;
-            break;
-          case "over-15000000":
-            matchesPrice = car.price >= 15000000;
-            break;
-        }
-      }
-
-      return (
-        matchesSearch &&
-        matchesBrand &&
-        matchesYear &&
-        matchesTransmission &&
-        matchesPrice
-      );
+      return matchesBrand && matchesYear;
     });
 
     // Sort cars
@@ -139,39 +99,24 @@ const Cars = () => {
     });
 
     return filtered;
-  }, [
-    cars,
-    searchTerm,
-    brandFilter,
-    yearFilter,
-    priceFilter,
-    transmissionFilter,
-    sortBy,
-  ]);
+  }, [cars, brandFilter, yearFilter, sortBy]);
 
   // Calculate the range of cars being shown
   const firstCarIndex = (currentPage - 1) * carsPerPage + 1;
   const lastCarIndex = Math.min(currentPage * carsPerPage, totalCars);
-  const showingResultsText = `Showing ${firstCarIndex}–${lastCarIndex} of ${totalCars} results`;
+  const showingResultsText =
+    totalCars > 0
+      ? `Showing ${firstCarIndex}–${lastCarIndex} of ${totalCars} results`
+      : "No cars found";
 
   const clearFilters = () => {
-    setSearchTerm("");
     setBrandFilter("");
     setYearFilter("");
-    setPriceFilter("");
-    setTransmissionFilter("");
     setCurrentPage(1);
   };
 
   if (loading) {
-    return (
-      <CarsContainer>
-        <LoadingContainer>
-          <Spinner />
-          <LoadingText>Loading cars...</LoadingText>
-        </LoadingContainer>
-      </CarsContainer>
-    );
+    return <LoadingSpinner text="Loading cars..." />;
   }
 
   return (
@@ -196,16 +141,6 @@ const Cars = () => {
       {/* ====== FILTERS SECTION ====== */}
       <FiltersSection>
         <FiltersContainer>
-          <SearchContainer>
-            <SearchIcon size={20} />
-            <SearchInput
-              type="text"
-              placeholder="Search by brand, model, or description..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </SearchContainer>
-
           <FilterGroup>
             <FilterSelect
               value={brandFilter}
@@ -229,32 +164,25 @@ const Cars = () => {
               ))}
             </FilterSelect>
 
-            <FilterSelect
-              value={priceFilter}
-              onChange={(e) => setPriceFilter(e.target.value)}>
-              <option value="">All Prices</option>
-              <option value="under-5000000">Under ₦5,000,000</option>
-              <option value="5000000-10000000">₦5,000,000 - ₦10,000,000</option>
-              <option value="10000000-15000000">
-                ₦10,000,000 - ₦15,000,000
-              </option>
-              <option value="over-15000000">Over ₦15,000,000</option>
-            </FilterSelect>
+            <SortContainer>
+              <SortLabel>Sort by:</SortLabel>
+              <FilterSelect
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}>
+                <option value="brand">Brand (A–Z)</option>
+                <option value="price-low">Price (Low → High)</option>
+                <option value="price-high">Price (High → Low)</option>
+                <option value="year-new">Newest Year</option>
+                <option value="year-old">Oldest Year</option>
+              </FilterSelect>
 
-            <FilterSelect
-              value={transmissionFilter}
-              onChange={(e) => setTransmissionFilter(e.target.value)}>
-              <option value="">All Transmissions</option>
-              {transmissions.map((transmission) => (
-                <option key={transmission} value={transmission}>
-                  {transmission}
-                </option>
-              ))}
-            </FilterSelect>
-
-            <ClearFiltersButton onClick={clearFilters}>
-              Clear Filters
-            </ClearFiltersButton>
+              <ClearFiltersButton onClick={clearFilters} title="Clear Filters">
+                <span className="clear-text">Clear Filters</span>
+                <span className="clear-icon">
+                  <RotateCcw size={20} />
+                </span>
+              </ClearFiltersButton>
+            </SortContainer>
           </FilterGroup>
         </FiltersContainer>
       </FiltersSection>
@@ -264,24 +192,7 @@ const Cars = () => {
         <ResultsHeader>
           {error ? (
             <ResultsCount style={{ color: "red" }}>{error}</ResultsCount>
-          ) : (
-            <ResultsCount>
-              {totalCars > 0 ? showingResultsText : "No cars found"}
-            </ResultsCount>
-          )}
-
-          <SortContainer>
-            <SortLabel>Sort by:</SortLabel>
-            <FilterSelect
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}>
-              <option value="brand">Brand (A–Z)</option>
-              <option value="price-low">Price (Low → High)</option>
-              <option value="price-high">Price (High → Low)</option>
-              <option value="year-new">Newest Year</option>
-              <option value="year-old">Oldest Year</option>
-            </FilterSelect>
-          </SortContainer>
+          ) : null}
         </ResultsHeader>
 
         {filteredAndSortedCars.length > 0 ? (
@@ -324,6 +235,10 @@ const Cars = () => {
                 </PageButton>
               </PaginationContainer>
             )}
+
+            <ResultsCount style={{ textAlign: "center", marginTop: "2rem" }}>
+              {showingResultsText}
+            </ResultsCount>
           </motion.div>
         ) : (
           <NoResults>

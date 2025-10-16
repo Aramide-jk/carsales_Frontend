@@ -1,11 +1,12 @@
 import React, { useState, useMemo, useEffect } from "react";
-// import styled from "styled-components";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+// import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { getSoldCars } from "../../services/api";
 import type { Car } from "../../types";
 import CarCard from "../../components/CarCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const SoldCarsContainer = styled.div`
   min-height: 100vh;
@@ -198,34 +199,34 @@ const NoResults = styled.div`
   }
 `;
 
-const LoadingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh;
-  gap: 1rem;
-`;
+// const LoadingContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 60vh;
+//   gap: 1rem;
+// `;
 
-const spin = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-`;
+// const spin = keyframes`
+//   0% { transform: rotate(0deg); }
+//   100% { transform: rotate(360deg); }
+// `;
 
-const Spinner = styled.div`
-  border: 4px solid rgba(220, 38, 38, 0.2);
-  border-top: 4px solid #dc2626;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: ${spin} 1s linear infinite;
-`;
+// const Spinner = styled.div`
+//   border: 4px solid rgba(220, 38, 38, 0.2);
+//   border-top: 4px solid #dc2626;
+//   border-radius: 50%;
+//   width: 40px;
+//   height: 40px;
+//   animation: ${spin} 1s linear infinite;
+// `;
 
-const LoadingText = styled.p`
-  color: #666;
-  font-size: 1.1rem;
-  font-weight: 500;
-`;
+// const LoadingText = styled.p`
+//   color: #666;
+//   font-size: 1.1rem;
+//   font-weight: 500;
+// `;
 
 const SoldCars: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -279,25 +280,12 @@ const SoldCars: React.FC = () => {
   //   },
   // ];
 
-  // Render
   if (loading) {
-    return (
-      <SoldCarsContainer>
-        <p>Loading sold cars...</p>
-        <LoadingContainer>
-          <Spinner />
-          <LoadingText>Loading sold cars...</LoadingText>
-        </LoadingContainer>
-      </SoldCarsContainer>
-    );
+    return <LoadingSpinner text="Loading sold cars..." />;
   }
 
   if (error) {
-    return (
-      <SoldCarsContainer>
-        <p className="text-red-600">{error}</p>
-      </SoldCarsContainer>
-    );
+    return <LoadingSpinner text={`Error: ${error}`} />;
   }
 
   return (

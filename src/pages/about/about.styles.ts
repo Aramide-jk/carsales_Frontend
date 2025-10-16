@@ -77,6 +77,7 @@ export const SectionTitle = styled.h2`
   text-align: center;
   margin-bottom: 3.5rem;
   position: relative;
+
   padding-bottom: 1rem;
 
   &::after {
@@ -88,6 +89,12 @@ export const SectionTitle = styled.h2`
     width: 60px;
     height: 3px;
     background: #dc2626;
+  }
+
+  @media (max-width: 768px) {
+    // font-size: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
   }
 `;
 

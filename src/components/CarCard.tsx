@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Eye, Calendar, Fuel, Settings, Shield } from "lucide-react";
-import Button from "./Button";
+import { Eye, Calendar, Shield, Gauge, LocateIcon } from "lucide-react";
+// import Button from "./Button";
 import type { Car } from "../types";
 
 interface CarCardProps {
@@ -11,16 +11,6 @@ interface CarCardProps {
   index?: number;
   isSold?: boolean;
 }
-
-// Format prices to  Naira
-
-// const formatMileage = (mileage: string): string => {
-//   const numericMileage = parseInt(mileage, 10);
-//   if (isNaN(numericMileage)) {
-//     return mileage;
-//   }
-//   return numericMileage.toLocaleString();
-// };
 
 const CardContainer = styled(motion.div)`
   background: white;
@@ -31,8 +21,8 @@ const CardContainer = styled(motion.div)`
   cursor: pointer;
 
   @media (max-width: 480px) {
-    width: 100%;
-    border-radius: 0;
+    // width: 100%;
+    border-radius: 10px;
   }
 `;
 
@@ -107,22 +97,24 @@ const CardContent = styled.div`
 
 const CarTitle = styled.h3`
   font-family: "Playfair Display", serif;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 500;
   color: #1a1a1a;
   text-transform: capitalize;
   margin-bottom: 0.5rem;
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 `;
 
 const CarSpecs = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  display: flex;
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  // gap: 1rem;
+  margin-bottom: 0.5rem;
 
   @media (max-width: 768px) {
     display: flex;
@@ -134,9 +126,11 @@ const SpecItem = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   font-weight: 400;
   color: #666;
+  margin-bottom: 0.5rem;
+
   text-transform: capitalize;
 
   svg {
@@ -144,26 +138,25 @@ const SpecItem = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-size: 1rem;
+    // font-weight: 500;
   }
 `;
 
-const PriceContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+const Divider = styled.hr`
+  border: 0;
+  border-top: 0.5px solid red;
+  margin: 0.75rem 0;
 `;
 
 const Price = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: #dc2626;
   font-family: "Playfair Display", serif;
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 `;
 
@@ -172,15 +165,6 @@ const SoldLabel = styled.div`
   font-weight: 700;
   color: #dc2626;
   font-family: "Playfair Display", serif;
-`;
-
-const ActionButtons = styled.div`
-  display: flex;
-  gap: 0.8rem;
-
-  @media (max-width: 480px) {
-    flex-direction: column;
-  }
 `;
 
 const CarCard: React.FC<CarCardProps> = ({
@@ -201,7 +185,7 @@ const CarCard: React.FC<CarCardProps> = ({
         />
         <ImageOverlay />
         <ViewButton to={`/cars/${car._id}`}>
-          <Eye size={16} />
+          <Eye size={20} />
           View
         </ViewButton>
       </ImageContainer>
@@ -215,52 +199,33 @@ const CarCard: React.FC<CarCardProps> = ({
 
         <CarSpecs>
           <SpecItem>
-            <Calendar size={16} />
+            <Calendar size={20} />
             <span>{car.year}</span>
           </SpecItem>
           <SpecItem>
-            <Settings size={16} />
-            <span>{car.transmission}</span>
-          </SpecItem>
-          <SpecItem>
-            <Fuel size={16} />
-            <span>{car.fuelType}</span>
-          </SpecItem>
-          <SpecItem>
-            <Shield size={16} />
+            <Shield size={20} />
             <span>{car.condition}</span>
           </SpecItem>
         </CarSpecs>
 
         {isSold ? (
-          <PriceContainer>
-            <SoldLabel>SOLD</SoldLabel>
-          </PriceContainer>
+          <SoldLabel>SOLD</SoldLabel>
         ) : (
           <>
-            <PriceContainer>
-              <Price>₦{car.price.toLocaleString()}</Price>
-            </PriceContainer>
+            <Divider />
 
-            <ActionButtons>
-              <a
-                href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
-                  `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ flex: 1 }}>
-                <Button variant="primary" size="small" fullWidth>
-                  Chat
-                </Button>
-              </a>
+            <CarSpecs>
+              <SpecItem>
+                <Gauge size={20} />
+                <span>{car.mileage.toLocaleString()} km</span>
+              </SpecItem>
+              <SpecItem>
+                <LocateIcon size={20} />
+                <span>{car.location}</span>
+              </SpecItem>
+            </CarSpecs>
 
-              <Link to={`/book-inspection?car=${car._id}`} style={{ flex: 1 }}>
-                <Button variant="outline" size="small" fullWidth>
-                  Book Inspection
-                </Button>
-              </Link>
-            </ActionButtons>
+            <Price>₦{car.price.toLocaleString()}</Price>
           </>
         )}
       </CardContent>

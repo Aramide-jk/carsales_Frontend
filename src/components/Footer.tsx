@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  Car,
   Phone,
   Mail,
   MapPin,
@@ -42,6 +41,9 @@ const FooterGrid = styled.div`
   @media (max-width: 768px) {
     text-align: left;
   }
+  .logo-text {
+    color: #dc2626;
+  }
 `;
 
 const FooterSection = styled.div`
@@ -59,24 +61,25 @@ const FooterSection = styled.div`
   }
 `;
 
-const Logo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: "Playfair Display", serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 1rem;
+// const Logo = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 0.5rem;
+//   font-family: "Playfair Display", serif;
+//   font-size: 1.8rem;
+//   font-weight: 700;
+//   color: #1a1a1a;
+//   margin-bottom: 1rem;
+//   text-transform: uppercase;
 
-  .logo-icon {
-    color: #dc2626;
-  }
+//   .logo-icon {
+//     color: #dc2626;
+//   }
 
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-`;
+//   @media (max-width: 768px) {
+//     justify-content: center;
+//   }
+// `;
 
 const Tagline = styled.p`
   font-style: italic;
@@ -95,7 +98,25 @@ const FooterLink = styled(Link)`
     color: #dc2626;
   }
 `;
+const Logo = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
 
+  .logo-icon {
+    color: #dc2626;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+`;
 const ContactInfo = styled.div`
   display: flex;
   align-items: center;
@@ -163,9 +184,8 @@ const Footer: React.FC = () => {
       <FooterContent>
         <FooterGrid>
           <FooterSection>
-            <Logo>
-              <Car className="logo-icon" size={28} />
-              jk_Autos
+            <Logo to="/">
+              <span className="logo-text">jk</span>_Autos
             </Logo>
             <Tagline>Luxury on Wheels. Curated for You.</Tagline>
             <p>

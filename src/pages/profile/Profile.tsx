@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { getProfile, getInspections } from "../../services/api";
-import type { User, InspectionBooking } from "../../types";
 import {
-  Check,
-  X,
-  Calendar,
-  Loader,
-  ClipboardList,
-  LogOut,
-} from "lucide-react";
+  getProfile,
+  getInspections,
+  getSellRequests,
+} from "../../services/api";
+import type { User, InspectionBooking, SellRequest } from "../../types";
+import { Check, X, Calendar, ClipboardList, LogOut } from "lucide-react";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import {
   ProfileContainer,
   ProfileWrapper,
@@ -26,8 +24,7 @@ import {
   ActivityIcon,
   ActivityDetails,
   ActivityStatus,
-  LoadingSpinner,
-  ErrorMessage,
+  // LoadingSpinner,
   NoActivityMessage,
 } from "./profile.styles";
 
@@ -36,6 +33,7 @@ const Profile: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [inspections, setInspections] = useState<InspectionBooking[]>([]);
+  const [sellRequests, setSellRequests] = useState<SellRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,12 +46,15 @@ const Profile: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [profileData, inspectionsData] = await Promise.all([
-          getProfile(),
-          getInspections(),
-        ]);
+        const [profileData, inspectionsData, sellRequestsData] =
+          await Promise.all([
+            getProfile(),
+            getInspections(),
+            getSellRequests(),
+          ]);
         setUser(profileData);
         setInspections(inspectionsData);
+        setSellRequests(sellRequestsData);
       } catch (err) {
         setError("Failed to load profile data. Please try again later.");
         console.error(err);
@@ -66,21 +67,11 @@ const Profile: React.FC = () => {
   }, [token, navigate]);
 
   if (loading) {
-    return (
-      <ProfileContainer>
-        <LoadingSpinner>
-          <Loader className="animate-spin" /> Loading Profile...
-        </LoadingSpinner>
-      </ProfileContainer>
-    );
+    return <LoadingSpinner text="Loading Profile..." />;
   }
 
   if (error) {
-    return (
-      <ProfileContainer>
-        <ErrorMessage>{error}</ErrorMessage>
-      </ProfileContainer>
-    );
+    return <LoadingSpinner text={error} />;
   }
 
   if (!user) return null;
@@ -158,6 +149,37 @@ const Profile: React.FC = () => {
               <p>You have no inspection activities yet.</p>
             </NoActivityMessage>
           )}
+        </ActivitySection>
+
+        <ActivitySection>
+          <SectionTitle>My Sell Requests</SectionTitle>
+          {sellRequests.length > 0 ? (
+            <ActivityList>
+              {sellRequests.map((request) => (
+                <ActivityItem key={request._id}>
+                  <ActivityIcon status={request.status}>
+                    {getStatusIcon(request.status)}
+                  </ActivityIcon>
+
+                  <ActivityDetails>
+                    <p>
+                      Sell request for{" "}
+                      <span>
+                        {request.brand} {request.model}
+                      </span>
+                    </p>
+                    <small>
+                      Submitted on{" "}
+                      {new Date(request.createdAt).toLocaleDateString()}
+                    </small>
+                  </ActivityDetails>
+                  <ActivityStatus status={request.status}>
+                    {request.status}
+                  </ActivityStatus>
+                </ActivityItem>
+              ))}
+            </ActivityList>
+          ) : null}
         </ActivitySection>
       </ProfileWrapper>
     </ProfileContainer>

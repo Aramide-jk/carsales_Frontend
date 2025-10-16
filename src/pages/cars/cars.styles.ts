@@ -1,6 +1,39 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
+import { keyframes } from "styled-components";
+
+export const ClearFiltersButton = styled.button`
+  background: transparent;
+  color: #dc2626;
+  padding: 0.5rem 1rem;
+  border: 2px solid rgba(220, 38, 38, 0.2);
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #dc2626;
+    color: white;
+  }
+
+  .clear-icon {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .clear-text {
+      display: none;
+    }
+    .clear-icon {
+      display: inline-block;
+    }
+
+    padding: 0.8rem;
+    min-width: 44px;
+    line-height: 1;
+  }
+`;
 
 export const CarsContainer = styled.div`
   min-height: 100vh;
@@ -79,8 +112,12 @@ export const PageSubtitle = styled(motion.p)`
 export const FiltersSection = styled.section`
   padding: 2rem;
   max-width: 1280px;
-  // margin: 0 auto;
+  margin: 0 auto;
   border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 export const FiltersContainer = styled.div`
@@ -94,43 +131,43 @@ export const FiltersContainer = styled.div`
   }
 `;
 
-export const SearchContainer = styled.div`
-  position: relative;
-  flex: 1;
-  min-width: 300px;
+// export const SearchContainer = styled.div`
+//   position: relative;
+//   flex: 1;
+//   min-width: 300px;
 
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
+//   @media (max-width: 768px) {
+//     width: 100%;
+//   }
+// `;
 
-export const SearchInput = styled.input`
-  width: 100%;
-  padding: 0.8rem 1rem 0.8rem 3rem;
-  border: 2px solid rgba(220, 38, 38, 0.2);
-  border-radius: 12px;
-  font-size: 1rem;
-  background: white;
-  transition: all 0.3s ease;
+// export const SearchInput = styled.input`
+//   width: 100%;
+//   padding: 0.8rem 1rem 0.8rem 3rem;
+//   border: 2px solid rgba(220, 38, 38, 0.2);
+//   border-radius: 12px;
+//   font-size: 1rem;
+//   background: white;
+//   transition: all 0.3s ease;
 
-  &:focus {
-    outline: none;
-    border-color: #dc2626;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-  }
+//   &:focus {
+//     outline: none;
+//     border-color: #dc2626;
+//     box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+//   }
 
-  &::placeholder {
-    color: #999;
-  }
-`;
+//   &::placeholder {
+//     color: #999;
+//   }
+// `;
 
-export const SearchIcon = styled(Search)`
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #dc2626;
-`;
+// export const SearchIcon = styled(Search)`
+//   position: absolute;
+//   left: 1rem;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   color: #dc2626;
+// `;
 
 export const FilterGroup = styled.div`
   display: flex;
@@ -140,9 +177,9 @@ export const FilterGroup = styled.div`
 `;
 
 export const FilterSelect = styled.select`
-  padding: 0.8rem 1rem;
+  padding: 0.5rem 0.2rem;
   border: 2px solid rgba(220, 38, 38, 0.2);
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 1rem;
   background: white;
   color: #2b2b2b;
@@ -156,21 +193,21 @@ export const FilterSelect = styled.select`
   }
 `;
 
-export const ClearFiltersButton = styled.button`
-  background: transparent;
-  color: #dc2626;
-  padding: 0.8rem 1rem;
-  border: 2px solid #dc2626;
-  border-radius: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
+// export const ClearFiltersButton = styled.button`
+//   background: transparent;
+//   color: #dc2626;
+//   padding: 0.8rem 1rem;
+//   border: 2px solid #dc2626;
+//   border-radius: 12px;
+//   font-weight: 500;
+//   cursor: pointer;
+//   transition: all 0.3s ease;
 
-  &:hover {
-    background: #dc2626;
-    color: white;
-  }
-`;
+//   &:hover {
+//     background: #dc2626;
+//     color: white;
+//   }
+// `;
 
 export const ResultsSection = styled.section`
   padding: 2rem;
@@ -178,7 +215,7 @@ export const ResultsSection = styled.section`
   // margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 0;
+    padding: 1rem;
   }
 `;
 
@@ -238,7 +275,7 @@ export const SortContainer = styled.div`
   gap: 1rem;
 
   @media (max-width: 768px) {
-    margin-left: 1rem;
+    // margin-left: 1rem;
   }
 `;
 
@@ -250,7 +287,6 @@ export const SortLabel = styled.span`
 export const CarsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
   // grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   margin-bottom: 3rem;
@@ -284,8 +320,13 @@ export const PaginationContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 2rem;
-  padding-bottom: 2rem;
+  margin-top: 1rem;
+  padding-bottom: 1;
+
+  @media (max-width: 768px) {
+    padding-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
 `;
 
 export const PageButton = styled.button<{ $active?: boolean }>`
@@ -309,6 +350,10 @@ export const PageButton = styled.button<{ $active?: boolean }>`
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.3rem 0.8rem;
   }
 `;
 

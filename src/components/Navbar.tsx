@@ -274,7 +274,7 @@ const Navbar: React.FC = () => {
       <NavContainer $hidden={isBottomNavHidden}>
         <NavWrapper>
           <Logo to="/">
-            <span className="logo-text">jk</span> _Autos
+            <span className="logo-text">jk</span>_Autos
           </Logo>
         </NavWrapper>
         <Divider />
