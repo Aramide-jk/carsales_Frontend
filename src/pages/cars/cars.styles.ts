@@ -174,17 +174,31 @@ export const FilterGroup = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
+
+  .brand-year-filters {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+
+    @media (min-width: 769px) {
+      width: auto;
+    }
+  }
 `;
 
 export const FilterSelect = styled.select`
-  padding: 0.5rem 0.2rem;
+  padding: 0.8rem 2.5rem 0.8rem 1rem;
   border: 2px solid rgba(220, 38, 38, 0.2);
   border-radius: 10px;
   font-size: 1rem;
   background: white;
   color: #2b2b2b;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   transition: all 0.3s ease;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -215,7 +229,7 @@ export const ResultsSection = styled.section`
   // margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 2rem;
+    padding: 1rem;
   }
 `;
 
@@ -272,10 +286,20 @@ export const LoadingText = styled.p`
 export const SortContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+`;
 
-  @media (max-width: 768px) {
-    // margin-left: 1rem;
+export const SelectWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+
+  .select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: #dc2626;
+    pointer-events: none;
   }
 `;
 

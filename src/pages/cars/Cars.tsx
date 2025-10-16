@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, ChevronDown } from "lucide-react";
 
 import CarCard from "../../components/CarCard";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -29,6 +29,7 @@ import {
   SortLabel,
   PaginationContainer,
   PageButton,
+  SelectWrapper,
 } from "./cars.styles";
 
 import { getCars } from "../../services/api";
@@ -47,7 +48,7 @@ const Cars = () => {
   const [brandFilter, setBrandFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
   const [sortBy, setSortBy] = useState("brand");
-  const carsPerPage = 2;
+  const carsPerPage = 1;
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -115,6 +116,25 @@ const Cars = () => {
     setCurrentPage(1);
   };
 
+  const getPaginationItems = () => {
+    if (totalPages <= 3) {
+      return [...Array(totalPages).keys()].map((i) => i + 1);
+    }
+
+    let startPage;
+    if (currentPage === 1) {
+      startPage = 1;
+    } else if (currentPage === totalPages) {
+      startPage = totalPages - 2;
+    } else {
+      startPage = currentPage - 1;
+    }
+
+    const pages = [...Array(3).keys()].map((i) => startPage + i);
+
+    return pages;
+  };
+
   if (loading) {
     return <LoadingSpinner text="Loading cars..." />;
   }
@@ -142,47 +162,52 @@ const Cars = () => {
       <FiltersSection>
         <FiltersContainer>
           <FilterGroup>
-            <FilterSelect
-              value={brandFilter}
-              onChange={(e) => setBrandFilter(e.target.value)}>
-              <option value="">All Brands</option>
-              {brands.map((brand) => (
-                <option key={brand} value={brand}>
-                  {brand}
-                </option>
-              ))}
-            </FilterSelect>
+            <div className="brand-year-filters">
+              <FilterSelect
+                value={brandFilter}
+                onChange={(e) => setBrandFilter(e.target.value)}>
+                <option value="">All Brands</option>
+                {brands.map((brand) => (
+                  <option key={brand} value={brand}>
+                    {brand}
+                  </option>
+                ))}
+              </FilterSelect>
 
-            <FilterSelect
-              value={yearFilter}
-              onChange={(e) => setYearFilter(e.target.value)}>
-              <option value="">All Years</option>
-              {years.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </FilterSelect>
+              <FilterSelect
+                value={yearFilter}
+                onChange={(e) => setYearFilter(e.target.value)}>
+                <option value="">All Years</option>
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </FilterSelect>
+            </div>
 
             <SortContainer>
               <SortLabel>Sort by:</SortLabel>
-              <FilterSelect
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}>
-                <option value="brand">Brand (A–Z)</option>
-                <option value="price-low">Price (Low → High)</option>
-                <option value="price-high">Price (High → Low)</option>
-                <option value="year-new">Newest Year</option>
-                <option value="year-old">Oldest Year</option>
-              </FilterSelect>
-
-              <ClearFiltersButton onClick={clearFilters} title="Clear Filters">
-                <span className="clear-text">Clear Filters</span>
-                <span className="clear-icon">
-                  <RotateCcw size={20} />
-                </span>
-              </ClearFiltersButton>
+              <SelectWrapper>
+                <FilterSelect
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}>
+                  <option value="brand">Brand (A–Z)</option>
+                  <option value="price-low">Price (Low → High)</option>
+                  <option value="price-high">Price (High → Low)</option>
+                  <option value="year-new">Newest Year</option>
+                  <option value="year-old">Oldest Year</option>
+                </FilterSelect>
+                <ChevronDown size={20} className="select-arrow" />
+              </SelectWrapper>
             </SortContainer>
+
+            <ClearFiltersButton onClick={clearFilters} title="Clear Filters">
+              <span className="clear-text">Clear Filters</span>
+              <span className="clear-icon">
+                <RotateCcw size={20} />
+              </span>
+            </ClearFiltersButton>
           </FilterGroup>
         </FiltersContainer>
       </FiltersSection>
@@ -216,15 +241,20 @@ const Cars = () => {
                   disabled={currentPage === 1}>
                   Previous
                 </PageButton>
-
-                {[...Array(totalPages).keys()].map((num) => (
-                  <PageButton
-                    key={num}
-                    onClick={() => setCurrentPage(num + 1)}
-                    $active={currentPage === num + 1}>
-                    {num + 1}
-                  </PageButton>
-                ))}
+                {getPaginationItems().map((item, index) =>
+                  typeof item === "number" ? (
+                    <PageButton
+                      key={`${item}-${index}`}
+                      onClick={() => setCurrentPage(item)}
+                      $active={currentPage === item}>
+                      {item}
+                    </PageButton>
+                  ) : (
+                    <PageButton key={`${item}-${index}`} as="span" disabled>
+                      {item}
+                    </PageButton>
+                  )
+                )}
 
                 <PageButton
                   onClick={() =>
