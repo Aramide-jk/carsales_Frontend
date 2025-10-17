@@ -84,20 +84,20 @@ const Contact: React.FC = () => {
     {
       icon: Phone,
       title: "Phone",
-      content: "+234 813 013 575 6",
+      content: "+234 803 737 188 1",
       description: "Call us anytime for immediate assistance",
     },
     {
       icon: Mail,
       title: "Email",
-      content: "jkautos97@gmail.com",
+      content: "skleeno@gmail.com",
       description: "Send us your questions and we'll respond promptly",
     },
     {
       icon: MapPin,
       title: "Address",
-      content: "12, kasimu lawalstreet,",
-      description: "City Center, zaria",
+      content: "sk, mabushi expressway,",
+      description: "City Center, abuja, Nigeria",
     },
     {
       icon: Clock,
@@ -172,7 +172,7 @@ const Contact: React.FC = () => {
                   <CheckCircle size={48} className="success-icon" />
                   <h3>Message Sent Successfully!</h3>
                   <p>
-                    Thank you for contacting jk_Autos. We've received your
+                    Thank you for contacting SK_Leeno. We've received your
                     message and will get back to you within 24 hours.
                   </p>
                 </SuccessMessage>
@@ -293,7 +293,7 @@ const Contact: React.FC = () => {
               location
             </MapSubtitle>
             <MapFrame>
-              Interactive Map Coming Soon - 123 jk_Autos, City Center
+              Interactive Map Coming Soon - 123 SK_Leeno, City Center
             </MapFrame>
           </motion.div>
         </MapContainer>

@@ -254,7 +254,7 @@ const Home: React.FC = () => {
               textAlign: "center",
               color: "black",
             }}>
-            What Sets JK_Autos Apart
+            What Sets SK_Leeno Apart
           </SectionTitle>
           <WhyChooseGrid>
             {features.map((feature, index) => (

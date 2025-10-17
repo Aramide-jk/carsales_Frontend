@@ -43,9 +43,9 @@ export const ContentWrapper = styled.div`
   // padding: 0 2rem 4rem;
 `;
 
-export const CarDetailGrid = styled.div`
+export const CarDetailGrid = styled.div<{ $fromGallery?: boolean }>`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: ${(props) => (props.$fromGallery ? "1fr" : "1fr 1fr")};
   gap: 4rem;
 
   @media (max-width: 1024px) {

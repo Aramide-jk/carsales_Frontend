@@ -24,6 +24,7 @@ import Features from "./pages/features/Features";
 import SellYourCar from "./pages/sellRequest/SellYourCar";
 import SignUp from "./pages/signup/SignUp";
 import Profile from "./pages/profile/Profile";
+import Gallery from "./components/Gallery";
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="signup" element={<SignUp />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="gallery" element={<Gallery />} />
               </Routes>
             </AnimatePresence>
           </MainContent>

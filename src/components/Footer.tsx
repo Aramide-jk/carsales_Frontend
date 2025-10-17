@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
+  Car,
   Phone,
   Mail,
   MapPin,
@@ -41,9 +42,6 @@ const FooterGrid = styled.div`
   @media (max-width: 768px) {
     text-align: left;
   }
-  .logo-text {
-    color: #dc2626;
-  }
 `;
 
 const FooterSection = styled.div`
@@ -61,25 +59,24 @@ const FooterSection = styled.div`
   }
 `;
 
-// const Logo = styled.div`
-//   display: flex;
-//   align-items: center;
-//   gap: 0.5rem;
-//   font-family: "Playfair Display", serif;
-//   font-size: 1.8rem;
-//   font-weight: 700;
-//   color: #1a1a1a;
-//   margin-bottom: 1rem;
-//   text-transform: uppercase;
+const Logo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
 
-//   .logo-icon {
-//     color: #dc2626;
-//   }
+  .logo-icon {
+    color: #dc2626;
+  }
 
-//   @media (max-width: 768px) {
-//     justify-content: center;
-//   }
-// `;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+`;
 
 const Tagline = styled.p`
   font-style: italic;
@@ -98,25 +95,7 @@ const FooterLink = styled(Link)`
     color: #dc2626;
   }
 `;
-const Logo = styled(Link)`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: "Playfair Display", serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
 
-  .logo-icon {
-    color: #dc2626;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0;
-  }
-`;
 const ContactInfo = styled.div`
   display: flex;
   align-items: center;
@@ -172,11 +151,11 @@ const FooterBottom = styled.div`
   font-size: 0.9rem;
 `;
 
-const DesignCredit = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-`;
+// const DesignCredit = styled.span`
+//   display: inline-flex;
+//   align-items: center;
+//   gap: 0.3rem;
+// `;
 
 const Footer: React.FC = () => {
   return (
@@ -184,8 +163,9 @@ const Footer: React.FC = () => {
       <FooterContent>
         <FooterGrid>
           <FooterSection>
-            <Logo to="/">
-              <span className="logo-text">jk</span>_Autos
+            <Logo>
+              <Car className="logo-icon" size={28} />
+              SK_Leeno
             </Logo>
             <Tagline>Luxury on Wheels. Curated for You.</Tagline>
             <p>
@@ -195,7 +175,7 @@ const Footer: React.FC = () => {
             </p>
             <SocialIcons>
               <SocialIcon
-                href="https://www.instagram.com/jk__autos?igsh=dGx6cWg4aTl3NDAw"
+                href="https://www.instagram.com/s_k_leeno_Leeno?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
@@ -203,7 +183,7 @@ const Footer: React.FC = () => {
                 <Instagram size={18} />
               </SocialIcon>
               <SocialIcon
-                href="https://www.facebook.com/share/17QBNSPqhH/"
+                href="https://www.facebook.com/profile.php?id=100085997253896&ref=_xav_ig_profile_page_web"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
@@ -211,7 +191,7 @@ const Footer: React.FC = () => {
                 <Facebook size={18} />
               </SocialIcon>
               <SocialIcon
-                href="https://x.com/aramidejk?t=fvGxttaWDLkxW9iAvL1hDQ&s=09"
+                href="https://www.threads.com/@s_k_leeno_Leeno?xmt=AQF01r1sJ3kIBYTLXBcax82huacYGW87LVCzIwANdTc_ZrQ"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
@@ -242,23 +222,24 @@ const Footer: React.FC = () => {
             <h3>Contact Info</h3>
             <ContactInfo>
               <Phone size={18} />
-              <span>+234 813 013 575 6</span>
+              <span>+234 803 737 188 1</span>
             </ContactInfo>
             <ContactInfo>
               <Mail size={18} />
-              <span>jkautos97@gmail.com</span>
+              <span>SKautos@gmail.com</span>
             </ContactInfo>
             <ContactInfo>
               <MapPin size={18} />
-              <span>12,kasimlawal street, Zaria</span>
+              <span>sk city,Mabushi expressway,Abuja</span>
             </ContactInfo>
           </FooterSection>
         </FooterGrid>
 
         <FooterBottom>
           <p>
-            &copy; {new Date().getFullYear()} jk_Autos. All rights reserved. |{" "}
-            <DesignCredit>Designed with care❣️</DesignCredit>
+            &copy; {new Date().getFullYear()} S_K_Leeno_Leeno Ltd. | RC: 1971587
+            {/* | All rights reserved. */}
+            {/* <DesignCredit>Designed with care❣️</DesignCredit> */}
           </p>
         </FooterBottom>
       </FooterContent>

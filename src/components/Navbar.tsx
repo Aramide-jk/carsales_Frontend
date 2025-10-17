@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import styled from "styled-components";
 // import { motion } from "framer-motion";
-import { Home, Car, Tag, Info, User, Phone } from "lucide-react";
+import { Home, Car, Image, Info, User, Phone } from "lucide-react";
 
 const NavContainer = styled.nav<{ $hidden: boolean }>`
   position: fixed;
@@ -249,8 +249,9 @@ const Navbar: React.FC = () => {
   const navItems = [
     { path: "/", label: "Home" },
     { path: "/cars", label: "Available Cars" },
+    { path: "/gallery", label: "Gallery" },
     { path: "/sold-cars", label: "Sold Cars" },
-    { path: "/sell-your-car", label: "Sell My Car" },
+    // { path: "/sell-your-car", label: "Sell My Car" },
     { path: "/features", label: "Features" },
     { path: "/about", label: "About" },
     { path: "/contact", label: "Contact" },
@@ -259,8 +260,9 @@ const Navbar: React.FC = () => {
   const mobileNavItems = [
     { path: "/", label: "Home", icon: Home },
     { path: "/cars", label: "Cars", icon: Car },
-    { path: "/sell-your-car", label: "Sell", icon: Tag },
+    // { path: "/sell-your-car", label: "Sell", icon: Tag },
     { path: "/about", label: "About", icon: Info },
+    { path: "/gallery", label: "Gallery", icon: Image },
     { path: "/contact", label: "Contact", icon: Phone },
     {
       path: isSignedIn ? "/profile" : "/signin",
@@ -274,7 +276,7 @@ const Navbar: React.FC = () => {
       <NavContainer $hidden={isBottomNavHidden}>
         <NavWrapper>
           <Logo to="/">
-            <span className="logo-text">jk</span>_Autos
+            <span className="logo-text">SK</span>_Leeno
           </Logo>
         </NavWrapper>
         <Divider />

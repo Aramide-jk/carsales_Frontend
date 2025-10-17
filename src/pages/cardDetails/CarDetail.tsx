@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 import {
   DetailContainer,
   BackButton,
@@ -47,10 +47,13 @@ import Button from "../../components/Button";
 const CarDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [car, setCar] = useState<any>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const fromGallery = location.state?.fromGallery;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(fromGallery || false);
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -114,6 +117,14 @@ const CarDetail: React.FC = () => {
     );
   };
 
+  const handleCloseFullscreen = () => {
+    if (fromGallery) {
+      navigate("/gallery");
+    } else {
+      setIsFullscreen(false);
+    }
+  };
+
   const specs = [
     { icon: Calendar, label: "Year", value: car.year },
     { icon: Fuel, label: "Fuel Type", value: car.fuelType },
@@ -129,13 +140,13 @@ const CarDetail: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}>
-        <BackButton to="/cars">
+        <BackButton to={fromGallery ? "/gallery" : "/cars"}>
           <ArrowLeft size={20} />
-          Back to Cars
+          {fromGallery ? "Back to Gallery" : "Back to Cars"}
         </BackButton>
 
         <ContentWrapper>
-          <CarDetailGrid>
+          <CarDetailGrid $fromGallery={fromGallery}>
             {galleryImages.length > 0 && (
               <ImageSection>
                 <MainImageContainer onClick={() => setIsFullscreen(true)}>
@@ -151,25 +162,25 @@ const CarDetail: React.FC = () => {
                   </ImageNavButton>
                 </MainImageContainer>
 
-                <ThumbnailGrid>
-                  {galleryImages.map((image: string, index: number) => (
-                    <Thumbnail
-                      key={index}
-                      src={image}
-                      alt={`${car.name} ${index + 1}`}
-                      $active={index === currentImageIndex}
-                      onClick={() => setCurrentImageIndex(index)}
-                    />
-                  ))}
-                </ThumbnailGrid>
+                {!fromGallery && (
+                  <ThumbnailGrid>
+                    {galleryImages.map((image: string, index: number) => (
+                      <Thumbnail
+                        key={index}
+                        src={image}
+                        alt={`${car.name} ${index + 1}`}
+                        $active={index === currentImageIndex}
+                        onClick={() => setCurrentImageIndex(index)}
+                      />
+                    ))}
+                  </ThumbnailGrid>
+                )}
 
                 {/* Fullscreen Image Overlay */}
                 {isFullscreen && (
-                  <FullscreenOverlay onClick={() => setIsFullscreen(false)}>
+                  <FullscreenOverlay onClick={handleCloseFullscreen}>
                     {/* Close button */}
-                    <CloseButton onClick={() => setIsFullscreen(false)}>
-                      ×
-                    </CloseButton>
+                    <CloseButton onClick={handleCloseFullscreen}>×</CloseButton>
                     <FullscreenImageContainer
                       onClick={(e) => e.stopPropagation()}>
                       <MainImage
@@ -189,101 +200,103 @@ const CarDetail: React.FC = () => {
               </ImageSection>
             )}
 
-            <InfoSection>
-              <CarHeader>
-                <CarTitle
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}>
-                  {car.brand} {car.model}
-                </CarTitle>
-
-                {car.status === "sold" ? (
-                  <SoldLabel
+            {!fromGallery && (
+              <InfoSection>
+                <CarHeader>
+                  <CarTitle
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}>
-                    SOLD
-                  </SoldLabel>
-                ) : (
-                  <CarPrice
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}>
-                    ₦{car.price.toLocaleString()}
-                  </CarPrice>
-                )}
+                    transition={{ duration: 0.6 }}>
+                    {car.brand} {car.model}
+                  </CarTitle>
 
-                <CarDescription
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}>
-                  {car.description}
-                </CarDescription>
-              </CarHeader>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}>
-                <SectionTitle>Specifications</SectionTitle>
-                <SpecsGrid>
-                  {specs.map((spec) => (
-                    <SpecItem key={spec.label}>
-                      <spec.icon size={24} />
-                      <SpecContent>
-                        <h4>{spec.label}</h4>
-                        <p>{spec.value}</p>
-                      </SpecContent>
-                    </SpecItem>
-                  ))}
-                </SpecsGrid>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}>
-                <FeaturesSection>
-                  <SectionTitle>Premium Features</SectionTitle>
-                  <FeaturesList>
-                    {car.features &&
-                      car.features.map((feature: string, index: number) => (
-                        <FeatureItem key={index}>{feature}</FeatureItem>
-                      ))}
-                  </FeaturesList>
-                </FeaturesSection>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}>
-                <ActionButtons>
-                  <a
-                    href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
-                      `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ flex: 1 }}
-                    className="p-8">
-                    <Button variant="primary" size="large" fullWidth>
-                      Chat
-                    </Button>
-                  </a>
-                  {car.status !== "sold" && (
-                    <Link
-                      to={`/book-inspection?car=${car._id}`}
-                      style={{ flex: 1 }}>
-                      <Button variant="outline" size="large" fullWidth>
-                        Book Inspection
-                      </Button>
-                    </Link>
+                  {car.status === "sold" ? (
+                    <SoldLabel
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.1 }}>
+                      SOLD
+                    </SoldLabel>
+                  ) : (
+                    <CarPrice
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.1 }}>
+                      ₦{car.price.toLocaleString()}
+                    </CarPrice>
                   )}
-                </ActionButtons>
-              </motion.div>
-            </InfoSection>
+
+                  <CarDescription
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}>
+                    {car.description}
+                  </CarDescription>
+                </CarHeader>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}>
+                  <SectionTitle>Specifications</SectionTitle>
+                  <SpecsGrid>
+                    {specs.map((spec) => (
+                      <SpecItem key={spec.label}>
+                        <spec.icon size={24} />
+                        <SpecContent>
+                          <h4>{spec.label}</h4>
+                          <p>{spec.value}</p>
+                        </SpecContent>
+                      </SpecItem>
+                    ))}
+                  </SpecsGrid>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}>
+                  <FeaturesSection>
+                    <SectionTitle>Premium Features</SectionTitle>
+                    <FeaturesList>
+                      {car.features &&
+                        car.features.map((feature: string, index: number) => (
+                          <FeatureItem key={index}>{feature}</FeatureItem>
+                        ))}
+                    </FeaturesList>
+                  </FeaturesSection>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}>
+                  <ActionButtons>
+                    <a
+                      href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
+                        `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ flex: 1 }}
+                      className="p-8">
+                      <Button variant="primary" size="large" fullWidth>
+                        Chat
+                      </Button>
+                    </a>
+                    {car.status !== "sold" && (
+                      <Link
+                        to={`/book-inspection?car=${car._id}`}
+                        style={{ flex: 1 }}>
+                        <Button variant="outline" size="large" fullWidth>
+                          Book Inspection
+                        </Button>
+                      </Link>
+                    )}
+                  </ActionButtons>
+                </motion.div>
+              </InfoSection>
+            )}
           </CarDetailGrid>
         </ContentWrapper>
       </motion.div>

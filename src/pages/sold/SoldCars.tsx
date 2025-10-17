@@ -308,7 +308,7 @@ const SoldCars: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}>
             Discover the luxury vehicles that have found their perfect owners
-            through jk_Autos
+            through SK_Leeno
           </PageSubtitle> */}
         </HeaderContent>
       </HeaderSection>
