@@ -23,9 +23,9 @@ export const HeroBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=800")
+  background: url("https://i.pinimg.com/736x/d5/62/31/d56231182c2b7b3f34808a4789f6e76f.jpg")
     center/cover;
-  // opacity: 0.15;
+  // opacity: 0.2;
   z-index: 1;
 `;
 
@@ -41,6 +41,7 @@ export const HeroTitle = styled(motion.h1)`
   font-size: clamp(3rem, 8vw, 5rem);
   font-weight: normal;
   color: white;
+
   margin-bottom: 1.5rem;
   line-height: 1.1;
 
@@ -73,6 +74,8 @@ export const HeroButtons = styled(motion.div)`
   @media (max-width: 480px) {
     flex-direction: column;
     align-items: center;
+    // display: flex;
+    font-size: 1rem;
   }
 `;
 
@@ -152,6 +155,7 @@ export const FeaturedCarsCarousel = styled.div`
 
 export const ViewAllButton = styled.div`
   text-align: center;
+  margin-bottom: -3rem;
 `;
 
 export const WhyChooseSection = styled.section`
@@ -168,13 +172,18 @@ export const WhyChooseGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   width: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 `;
 
 export const FeatureCard = styled(motion.div)`
   text-align: center;
   padding: 2rem;
   background: white;
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   transition: transform 0.3s ease;
 

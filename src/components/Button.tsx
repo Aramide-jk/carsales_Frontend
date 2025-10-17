@@ -36,7 +36,7 @@ const ButtonBase = styled(motion.button)<{
 
   @media (max-width: 768px) {
     width: 100%;
-    border-radius: 5px;
+    border-radius: 10px;
   }
 
   ${(props) => {
@@ -82,15 +82,18 @@ const ButtonBase = styled(motion.button)<{
         `;
       case "outline":
         return css`
-          background: transparent;
+          // background: transparent;
           color: #dc2626;
           border: 2px solid #dc2626;
 
           &:hover:not(:disabled) {
-            background: #dc2626;
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+
+            @media (max-width: 768px) {
+            border-radius: 0px;
+            
           }
         `;
       default:

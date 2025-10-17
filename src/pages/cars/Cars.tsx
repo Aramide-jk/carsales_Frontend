@@ -48,7 +48,7 @@ const Cars = () => {
   const [brandFilter, setBrandFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
   const [sortBy, setSortBy] = useState("brand");
-  const carsPerPage = 1;
+  const carsPerPage = 12;
 
   useEffect(() => {
     const fetchCars = async () => {
