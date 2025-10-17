@@ -53,8 +53,8 @@ const Profile: React.FC = () => {
             getSellRequests(),
           ]);
         setUser(profileData);
-        setInspections(inspectionsData);
-        setSellRequests(sellRequestsData);
+        setInspections(inspectionsData || []);
+        setSellRequests(sellRequestsData || []);
       } catch (err) {
         setError("Failed to load profile data. Please try again later.");
         console.error(err);

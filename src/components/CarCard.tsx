@@ -96,7 +96,7 @@ const CardContent = styled.div`
 `;
 
 const CarTitle = styled.h3`
-  font-family: "Playfair Display", serif;
+  font-family: "playfair display", serif;
   font-size: 1.4rem;
   font-weight: 500;
   color: #1a1a1a;
@@ -151,7 +151,7 @@ const Divider = styled.hr`
 
 const Price = styled.div`
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #dc2626;
   font-family: "Playfair Display", serif;
 
