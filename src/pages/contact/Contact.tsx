@@ -300,7 +300,7 @@ const Contact: React.FC = () => {
       </MapSection>
 
       <WhatsAppButton
-        href="https://wa.me/message/LJBYJAKZGOFQK1"
+        href="https://wa.me/message/Q2XBMF4ZSDNK1"
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1 }}

@@ -273,7 +273,7 @@ const CarDetail: React.FC = () => {
                   transition={{ duration: 0.6, delay: 0.5 }}>
                   <ActionButtons>
                     <a
-                      href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
+                      href={`https://wa.me/message/Q2XBMF4ZSDNK1?text=${encodeURIComponent(
                         `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
                       )}`}
                       target="_blank"
