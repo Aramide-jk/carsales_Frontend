@@ -3,7 +3,6 @@ version: 0.2
 phases:
   install:
     commands:
-      - cd frontend
       - curl -sL https://rpm.nodesource.com/setup_18.x | bash -
       - yum install -y nodejs
       - npm install
