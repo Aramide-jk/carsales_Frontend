@@ -4,14 +4,14 @@ phases:
   install:
     commands:
       - echo Installing dependencies...
-      - npm ci
+      - npm install
 
   build:
     commands:
-      - echo Running Vite build...
+      - echo Building frontend...
       - npm run build
 
 artifacts:
   files:
     - '**/*'
-  base-directory: dist
+  base-directory: build
