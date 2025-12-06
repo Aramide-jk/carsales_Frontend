@@ -1,19 +1,24 @@
-  version: 0.2
+version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      nodejs: 18
     commands:
-      - echo Installing dependencies...
-      - npm ci
+      - cd frontend
+      - curl -sL https://rpm.nodesource.com/setup_18.x | bash -
+      - yum install -y nodejs
+      - npm install
 
   build:
     commands:
-      - echo Building frontend...
       - npm run build
+
+  post_build:
+    commands:
+      - echo Deploying to S3...
+      - aws s3 sync frontend/build/ s3://carsales-frontend-prod --delete
+      - aws cloudfront create-invalidation --distribution-id E19VEVVFP1O8WS --paths "/*"
 
 artifacts:
   files:
     - '**/*'
-  base-directory: build
+  base-directory: frontend/build
