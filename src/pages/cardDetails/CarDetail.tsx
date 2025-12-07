@@ -40,6 +40,7 @@ import {
   Shield,
   ChevronLeft,
   ChevronRight,
+  // Instagram,
 } from "lucide-react";
 import { getCarById } from "../../services/api";
 import Button from "../../components/Button";

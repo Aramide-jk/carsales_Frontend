@@ -2,7 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Eye, Calendar, Shield, Gauge, LocateIcon } from "lucide-react";
+import {
+  Eye,
+  Calendar,
+  Shield,
+  Gauge,
+  LocateIcon,
+  // Instagram,
+} from "lucide-react";
 // import Button from "./Button";
 import type { Car } from "../types";
 
@@ -167,6 +174,8 @@ const SoldLabel = styled.div`
   font-family: "Playfair Display", serif;
 `;
 
+
+
 const CarCard: React.FC<CarCardProps> = ({
   car,
   index = 0,
@@ -226,6 +235,7 @@ const CarCard: React.FC<CarCardProps> = ({
             </CarSpecs>
 
             <Price>₦{car.price.toLocaleString()}</Price>
+           
           </>
         )}
       </CardContent>
