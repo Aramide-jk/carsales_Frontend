@@ -2,7 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Eye, Calendar, Shield, Gauge, LocateIcon } from "lucide-react";
+import {
+  Eye,
+  Calendar,
+  Shield,
+  Gauge,
+  LocateIcon,
+
+} from "lucide-react";
 // import Button from "./Button";
 import type { Car } from "../types";
 
