@@ -13,7 +13,6 @@ const base =
   import.meta.env.MODE === "development"
     ? import.meta.env.VITE_LOCAL_URL || "http://localhost:5000"
     : "carseales-ALB-1283262710.us-east-1.elb.amazonaws.com"
-      "https://carsalesbackend-production.up.railway.app";
 
 const api = axios.create({
   baseURL: `${base}/api`,
