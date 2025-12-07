@@ -389,7 +389,7 @@ const BookInspection: React.FC = () => {
             <CheckCircle size={64} className="success-icon" />
             <h3>Inspection Booked Successfully!</h3>
             <p>
-              Thank you for booking with JK Autos. We'll contact you shortly to
+              Thank you for booking with SK Autos. We'll contact you shortly to
               confirm your inspection schedule.
             </p>
             <Button

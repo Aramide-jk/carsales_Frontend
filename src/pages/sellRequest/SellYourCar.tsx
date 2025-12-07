@@ -870,7 +870,7 @@ const SellYourCar: React.FC = () => {
             <CheckCircle size={64} className="success-icon" />
             <h3>Submission Received!</h3>
             <p>
-              Thank you for choosing jk_Autos to sell your luxury vehicle. Our
+              Thank you for choosing SK_Leeno to sell your luxury vehicle. Our
               team of experts will review your submission and contact you within
               24 hours with a competitive market evaluation and offer.
             </p>

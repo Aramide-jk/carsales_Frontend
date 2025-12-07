@@ -68,11 +68,11 @@ const About: React.FC = () => {
 
   const testimonials = [
     {
-      text: "jk_Autos transformed my car buying experience. Their attention to detail and commitment to excellence is unmatched. I found my dream car and couldn't be happier.",
-      author: "Aramide Ramadan",
+      text: "SK_Leeno transformed my car buying experience. Their attention to detail and commitment to excellence is unmatched. I found my dream car and couldn't be happier.",
+      author: "Sheriff",
     },
     {
-      text: "The level of service and professionalism at jk_Autos is exceptional. They made purchasing my luxury vehicle effortless and enjoyable.",
+      text: "The level of service and professionalism at SK_Leeno is exceptional. They made purchasing my luxury vehicle effortless and enjoyable.",
       author: "DLord",
     },
     {
@@ -85,7 +85,7 @@ const About: React.FC = () => {
     },
     {
       text: "Exceptional service from start to finish. They understood exactly what I was looking for and delivered beyond expectations. Truly a premium experience.",
-      author: "Odowu",
+      author: "Aliyu",
     },
   ];
 
@@ -136,7 +136,7 @@ const About: React.FC = () => {
               <h3>A Legacy of Luxury</h3>
               <p>
                 Founded in 2019 with a vision to redefine the luxury car buying
-                experience, jk_Autos began as a boutique dealership focused on
+                experience, SK_Leeno began as a boutique dealership focused on
                 curating exceptional vehicles for exceptional people.
               </p>
               <p>

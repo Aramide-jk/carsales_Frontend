@@ -77,7 +77,7 @@ const SignUp: React.FC = () => {
             <CheckCircle size={48} className="success-icon" />
             <h3>Account Created!</h3>
             <p>
-              You’ve successfully signed up for jk_Autos. Redirecting you to the
+              You’ve successfully signed up for SK_Leeno. Redirecting you to the
               sign-in page...
             </p>
           </SuccessMessage>
@@ -94,7 +94,7 @@ const SignUp: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}>
           <Logo>
-            jk_<span className="logo-accent">Autos</span>
+            SK_<span className="logo-accent">Autos</span>
           </Logo>
           <Title>Create Your Account</Title>
           <Subtitle>Join our luxury car community</Subtitle>

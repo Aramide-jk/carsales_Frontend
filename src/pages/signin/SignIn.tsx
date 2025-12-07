@@ -81,7 +81,7 @@ const SignIn: React.FC = () => {
             <CheckCircle size={48} className="success-icon" />
             <h3>Welcome Back!</h3>
             <p>
-              You have successfully signed in to your jk_Autos account.
+              You have successfully signed in to your SK_Leeno account.
               Redirecting you to your dashboard...
             </p>
           </SuccessMessage>
@@ -98,7 +98,7 @@ const SignIn: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}>
           <Logo>
-            jk_<span className="logo-accent">Autos</span>
+            SK_<span className="logo-accent">Autos</span>
           </Logo>
           <Title>Welcome Back</Title>
           <Subtitle>Sign in to your luxury car account</Subtitle>
@@ -160,7 +160,7 @@ const SignIn: React.FC = () => {
           </Form>
 
           <SignUpLink>
-            New to jk_Autos? <Link to="/signup">Sign up here</Link>
+            New to SK_Leeno? <Link to="/signup">Sign up here</Link>
           </SignUpLink>
         </FormCard>
       </FormWrapper>

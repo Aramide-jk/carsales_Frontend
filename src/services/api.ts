@@ -123,6 +123,16 @@ export const getCars = async (
   );
   return res.data;
 };
+
+export const getGalleryCars = async (
+  page = 1,
+  limit = 20
+): Promise<CarAPIResponse> => {
+  const res = await api.get<CarAPIResponse>(
+    `/cars?page=${page}&limit=${limit}`
+  );
+  return res.data;
+};
 export const getSoldCars = async (): Promise<Car[]> => {
   const res = await api.get<CarAPIResponse>("/sold");
   return res.data.data;
