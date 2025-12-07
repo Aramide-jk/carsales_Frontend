@@ -9,11 +9,16 @@ import type {
 } from "../types";
 
 // Environment-based API URL
+// const base =
+//   import.meta.env.MODE === "development"
+//     ? import.meta.env.VITE_LOCAL_URL || "http://localhost:5000"
+//     : import.meta.env.VITE_BACKEND_URL ||
+//       "https://carsalesbackend-production.up.railway.app";
 const base =
   import.meta.env.MODE === "development"
     ? import.meta.env.VITE_LOCAL_URL || "http://localhost:5000"
-    : import.meta.env.VITE_BACKEND_URL ||
-      "https://carsalesbackend-production.up.railway.app";
+    : import.meta.env.VITE_BACKEND_URL;
+// "https://carsalesbackend-production.up.railway.app";
 
 const api = axios.create({
   baseURL: `${base}/api`,
