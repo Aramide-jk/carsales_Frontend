@@ -237,7 +237,7 @@ const Footer: React.FC = () => {
 
         <FooterBottom>
           <p>
-            &copy; {new Date().getFullYear()} S_K_Leeno_Leeno Ltd. | RC: 1971587
+            &copy; {new Date().getFullYear()} JK_AUTOS Ltd. | RC: 191597
             {/* | All rights reserved. */}
             {/* <DesignCredit>Designed with care❣️</DesignCredit> */}
           </p>
