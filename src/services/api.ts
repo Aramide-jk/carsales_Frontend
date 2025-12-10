@@ -21,7 +21,7 @@ const base =
 // "https://carsalesbackend-production.up.railway.app";
 
 const api = axios.create({
-  baseURL: `${base}`,
+  baseURL: `${base}/api`,
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
   timeout: 30000,
