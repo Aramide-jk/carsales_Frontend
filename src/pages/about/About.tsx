@@ -87,6 +87,10 @@ const About: React.FC = () => {
       text: "Exceptional service from start to finish. They understood exactly what I was looking for and delivered beyond expectations. Truly a premium experience.",
       author: "Aliyu",
     },
+    {
+      text: "Exceptional service from start to finish. They understood exactly what I was looking for and delivered beyond expectations. Truly a premium experience.",
+      author: "Aliyu",
+    },
   ];
 
   return (
