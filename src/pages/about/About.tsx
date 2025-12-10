@@ -60,7 +60,7 @@ const About: React.FC = () => {
   ];
 
   const stats = [
-    { number: "110+", label: "Cars Sold" },
+    { number: "115+", label: "Cars Sold" },
     { number: "5+", label: "Years Experience" },
     { number: "98%", label: "Client Satisfaction" },
     { number: "45+", label: "Luxury Brands" },
@@ -68,7 +68,7 @@ const About: React.FC = () => {
 
   const testimonials = [
     {
-      text: "SK_Leeno transformed my car buying experience. Their attention to detail and commitment to excellence is unmatched. I found my dream car and couldn't be happier.",
+      text: "SK_Leeeno transformed my car buying experience. Their attention to detail and commitment to excellence is unmatched. I found my dream car and couldn't be happier.",
       author: "Sheriff",
     },
     {
@@ -82,6 +82,10 @@ const About: React.FC = () => {
     {
       text: "From browsing to purchase, every step was seamless. The team's expertise in luxury vehicles is evident in their curated collection.",
       author: "Adelekan",
+    },
+    {
+      text: "Exceptional service from start to finish. They understood exactly what I was looking for and delivered beyond expectations. Truly a premium experience.",
+      author: "Aliyu",
     },
     {
       text: "Exceptional service from start to finish. They understood exactly what I was looking for and delivered beyond expectations. Truly a premium experience.",

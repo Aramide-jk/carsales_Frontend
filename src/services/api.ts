@@ -118,7 +118,7 @@ export const getCars = async (
   page = 1,
   limit = 16
 ): Promise<CarAPIResponse> => {
-  console.log(base, ".....");
+  console.log(base, ".....u");
   const res = await api.get<CarAPIResponse>(
     `/cars?page=${page}&limit=${limit}`
   );
