@@ -79,7 +79,7 @@ const SignIn: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}>
             <CheckCircle size={48} className="success-icon" />
-            <h3>Welcome Back! `${formData.email}`</h3>
+            <h3>Welcome Back! {formData.email}</h3>
             <p>
               You have successfully signed in to your SK_Leeno account.
               Redirecting you to your dashboard...
