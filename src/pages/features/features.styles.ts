@@ -81,7 +81,7 @@ export const FeaturesGrid = styled.div`
 `;
 
 export const FeatureCard = styled(motion.div)`
-  background: white;
+  // background: white;
   padding: 2.5rem;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
@@ -138,7 +138,7 @@ export const ProcessGrid = styled.div`
 `;
 
 export const ProcessCard = styled(motion.div)<{ $step: number }>`
-  background: white;
+  // background: white;
   padding: 2rem;
   border-radius: 20px;
   text-align: center;
