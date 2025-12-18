@@ -201,7 +201,7 @@ export const ServicesList = styled.div`
 `;
 
 export const ServiceItem = styled(motion.div)`
-  background: white;
+  // background: white;
   padding: 1.5rem;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);

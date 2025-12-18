@@ -157,7 +157,7 @@ export const ValuesGrid = styled.div`
 `;
 
 export const ValueCard = styled(motion.div)`
-  background: white;
+  // background: white;
   padding: 2.5rem;
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
