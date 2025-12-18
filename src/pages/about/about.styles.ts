@@ -271,7 +271,7 @@ export const TestimonialGrid = styled.div`
 `;
 
 export const TestimonialCard = styled(motion.div)`
-  background: white;
+  // background: white;
   padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
