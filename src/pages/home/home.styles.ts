@@ -182,7 +182,7 @@ export const WhyChooseGrid = styled.div`
 export const FeatureCard = styled(motion.div)`
   text-align: center;
   padding: 2rem;
-  background: white;
+  // background: white;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   transition: transform 0.3s ease;
