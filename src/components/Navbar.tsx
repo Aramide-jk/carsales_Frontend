@@ -5,18 +5,17 @@ import styled from "styled-components";
 // import { motion } from "framer-motion";
 import { Home, Car, Image, Info, User, Phone } from "lucide-react";
 
-const NavContainer = styled.nav<{ $hidden: boolean }>`
+const NavContainer = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.98);
+  transition: transform 0.5s ease-in-out;
   // backdrop-filter: blur(10px);
   // transition: all 0.5s ease;
-  transition: transform 0.5s ease-in-out;
-  transform: ${(props) =>
-    props.$hidden ? "translateX(100%)" : "translateY(0)"};
+
   // z-index: 999;
   @media (max-width: 768px) {
     padding: 0.8rem 0;
@@ -273,7 +272,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <NavContainer $hidden={isBottomNavHidden}>
+      <NavContainer>
         <NavWrapper>
           <Logo to="/">
             <span className="logo-text">SK</span>_Leeno
