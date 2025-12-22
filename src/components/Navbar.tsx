@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { Home, Car, Image, Info, User, Phone } from "lucide-react";
 
 const NavContainer = styled.nav`
-  position: fixed;
+  // position: fixed;
   top: 0;
   left: 0;
   right: 0;

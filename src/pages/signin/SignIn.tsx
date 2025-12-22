@@ -81,7 +81,7 @@ const SignIn: React.FC = () => {
             <CheckCircle size={48} className="success-icon" />
             <h3>Welcome Back!</h3>
             <p>
-              You have successfully signed in to your SK_Leeno account.
+              You have successfully signed in to your JK_AUTOS account.
               Redirecting you to your dashboard...
             </p>
           </SuccessMessage>
@@ -160,7 +160,7 @@ const SignIn: React.FC = () => {
           </Form>
 
           <SignUpLink>
-            New to SK_Leeno? <Link to="/signup">Sign up here</Link>
+            New to JK_AUTOS? <Link to="/signup">Sign up here</Link>
           </SignUpLink>
         </FormCard>
       </FormWrapper>

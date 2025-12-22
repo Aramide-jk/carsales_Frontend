@@ -172,7 +172,7 @@ const Contact: React.FC = () => {
                   <CheckCircle size={48} className="success-icon" />
                   <h3>Message Sent Successfully!</h3>
                   <p>
-                    Thank you for contacting SK_Leeno. We've received your
+                    Thank you for contacting JK_AUTOS. We've received your
                     message and will get back to you within 24 hours.
                   </p>
                 </SuccessMessage>
@@ -293,7 +293,7 @@ const Contact: React.FC = () => {
               location
             </MapSubtitle>
             <MapFrame>
-              Interactive Map Coming Soon - 123 SK_Leeno, City Center
+              Interactive Map Coming Soon - 123 JK_AUTOS, City Center
             </MapFrame>
           </motion.div>
         </MapContainer>

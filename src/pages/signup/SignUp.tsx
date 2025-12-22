@@ -77,7 +77,7 @@ const SignUp: React.FC = () => {
             <CheckCircle size={48} className="success-icon" />
             <h3>Account Created!</h3>
             <p>
-              You’ve successfully signed up for SK_Leeno. Redirecting you to the
+              You’ve successfully signed up for JK_AUTOS. Redirecting you to the
               sign-in page...
             </p>
           </SuccessMessage>

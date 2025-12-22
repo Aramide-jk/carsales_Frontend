@@ -179,7 +179,7 @@ const Features: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}>
-            Discover what makes SK_Leeno the premier destination for luxury car
+            Discover what makes JK_AUTOS the premier destination for luxury car
             enthusiasts
           </PageSubtitle>
         </HeaderContent>

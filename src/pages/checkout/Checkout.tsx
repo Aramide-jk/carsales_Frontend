@@ -389,7 +389,7 @@ const Checkout: React.FC = () => {
                 <p>
                   Congratulations on your purchase of the {car.brand}{" "}
                   {car.carModel}! We'll contact you shortly to arrange delivery
-                  and finalize all paperwork. Welcome to the SK_Leeno family.
+                  and finalize all paperwork. Welcome to the JK_AUTOS family.
                 </p>
               </>
             )}

@@ -165,7 +165,7 @@ const Footer: React.FC = () => {
           <FooterSection>
             <Logo>
               <Car className="logo-icon" size={28} />
-              SK_Leeno
+              JK_AUTOS
             </Logo>
             <Tagline>Luxury on Wheels. Curated for You.</Tagline>
             <p>
