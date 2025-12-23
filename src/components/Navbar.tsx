@@ -13,7 +13,8 @@ const NavContainer = styled.nav<{ $hidden: boolean }>`
   z-index: 1000;
   background: rgba(255, 255, 255, 0.98);
   transition: transform 0.5s ease-in-out;
-  transform: ${(props) => (props.$hidden ? "translateY(-100%)" : "translateY(0)")};
+  transform: ${(props) =>
+    props.$hidden ? "translateY(-100%)" : "translateY(0)"};
   // backdrop-filter: blur(10px);
   // transition: all 0.5s ease;
 
@@ -276,7 +277,7 @@ const Navbar: React.FC = () => {
       <NavContainer $hidden={isNavHidden}>
         <NavWrapper>
           <Logo to="/">
-            <span className="logo-text">SK</span>_Leeno
+            <span className="logo-text">JK</span>_AUTOS
           </Logo>
         </NavWrapper>
         <Divider />
