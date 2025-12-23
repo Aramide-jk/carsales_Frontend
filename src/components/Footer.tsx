@@ -226,11 +226,11 @@ const Footer: React.FC = () => {
             </ContactInfo>
             <ContactInfo>
               <Mail size={18} />
-              <span>SKautos@gmail.com</span>
+              <span>jkautos97@gmail.com</span>
             </ContactInfo>
             <ContactInfo>
               <MapPin size={18} />
-              <span>sk city,Mabushi expressway,Abuja</span>
+              <span>jk city,Mabushi expressway,Abuja</span>
             </ContactInfo>
           </FooterSection>
         </FooterGrid>
