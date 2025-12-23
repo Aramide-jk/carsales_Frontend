@@ -98,7 +98,7 @@ const SignIn: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}>
           <Logo>
-            SK_<span className="logo-accent">Autos</span>
+            JK_<span className="logo-accent">Autos</span>
           </Logo>
           <Title>Welcome Back</Title>
           <Subtitle>Sign in to your luxury car account</Subtitle>

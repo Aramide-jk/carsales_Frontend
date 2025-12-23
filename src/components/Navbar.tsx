@@ -5,14 +5,15 @@ import styled from "styled-components";
 // import { motion } from "framer-motion";
 import { Home, Car, Image, Info, User, Phone } from "lucide-react";
 
-const NavContainer = styled.nav`
-  // position: fixed;
+const NavContainer = styled.nav<{ $hidden: boolean }>`
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.98);
   transition: transform 0.5s ease-in-out;
+  transform: ${(props) => (props.$hidden ? "translateY(-100%)" : "translateY(0)")};
   // backdrop-filter: blur(10px);
   // transition: all 0.5s ease;
 
@@ -216,7 +217,7 @@ const BottomNavItem = styled(Link)<{ $active: boolean }>`
 // === NAVBAR COMPONENT === //
 const Navbar: React.FC = () => {
   const [_, setIsScrolled] = useState(false);
-  const [isBottomNavHidden, setIsBottomNavHidden] = useState(false);
+  const [isNavHidden, setIsNavHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   // const navigate = useNavigate();
@@ -229,9 +230,9 @@ const Navbar: React.FC = () => {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 50);
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsBottomNavHidden(true);
+        setIsNavHidden(true);
       } else {
-        setIsBottomNavHidden(false);
+        setIsNavHidden(false);
       }
       setLastScrollY(currentScrollY);
     };
@@ -272,7 +273,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <NavContainer>
+      <NavContainer $hidden={isNavHidden}>
         <NavWrapper>
           <Logo to="/">
             <span className="logo-text">SK</span>_Leeno
@@ -303,7 +304,7 @@ const Navbar: React.FC = () => {
         </NavContent>
       </NavContainer>
       {/* Mobile Bottom Navigation */}
-      <BottomNav $hidden={isBottomNavHidden}>
+      <BottomNav $hidden={isNavHidden}>
         {mobileNavItems.map((item) => (
           <BottomNavItem
             key={item.path}

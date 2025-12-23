@@ -90,13 +90,13 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "skleeno@gmail.com",
+      content: "jkautos97@gmail.com",
       description: "Send us your questions and we'll respond promptly",
     },
     {
       icon: MapPin,
       title: "Address",
-      content: "sk, mabushi expressway,",
+      content: "jk, mabushi expressway,",
       description: "City Center, abuja, Nigeria",
     },
     {
