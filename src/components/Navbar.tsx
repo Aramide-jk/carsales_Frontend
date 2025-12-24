@@ -252,7 +252,7 @@ const Navbar: React.FC = () => {
     { path: "/cars", label: "Available Cars" },
     { path: "/gallery", label: "Gallery" },
     { path: "/sold-cars", label: "Sold Cars" },
-    // { path: "/sell-your-car", label: "Sell My Car" },
+    { path: "/sell-your-car", label: "Sell My Car" },
     { path: "/features", label: "Features" },
     { path: "/about", label: "About" },
     { path: "/contact", label: "Contact" },
@@ -261,7 +261,7 @@ const Navbar: React.FC = () => {
   const mobileNavItems = [
     { path: "/", label: "Home", icon: Home },
     { path: "/cars", label: "Cars", icon: Car },
-    // { path: "/sell-your-car", label: "Sell", icon: Tag },
+    { path: "/sell-your-car", label: "Sell", icon: Tag },
     { path: "/about", label: "About", icon: Info },
     { path: "/gallery", label: "Gallery", icon: Image },
     { path: "/contact", label: "Contact", icon: Phone },

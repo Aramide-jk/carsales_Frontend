@@ -175,7 +175,7 @@ const Footer: React.FC = () => {
             </p>
             <SocialIcons>
               <SocialIcon
-                href="https://www.instagram.com/s_k_leeno_Leeno?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                href="https://www.instagram.com/jk__autos"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
@@ -183,7 +183,7 @@ const Footer: React.FC = () => {
                 <Instagram size={18} />
               </SocialIcon>
               <SocialIcon
-                href="https://www.facebook.com/profile.php?id=100085997253896&ref=_xav_ig_profile_page_web"
+                href="https://www.facebook.com/profile.php?id=100069569327199"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
@@ -191,7 +191,7 @@ const Footer: React.FC = () => {
                 <Facebook size={18} />
               </SocialIcon>
               <SocialIcon
-                href="https://www.threads.com/@s_k_leeno_Leeno?xmt=AQF01r1sJ3kIBYTLXBcax82huacYGW87LVCzIwANdTc_ZrQ"
+                href="https://www.tiktok.com/@jk_autos"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
@@ -222,7 +222,7 @@ const Footer: React.FC = () => {
             <h3>Contact Info</h3>
             <ContactInfo>
               <Phone size={18} />
-              <span>+234 803 737 188 1</span>
+              <span>+234 813 013 575 6</span>
             </ContactInfo>
             <ContactInfo>
               <Mail size={18} />
