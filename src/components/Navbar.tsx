@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import styled from "styled-components";
 // import { motion } from "framer-motion";
-import { Home, Car, Image, Info, User, Phone } from "lucide-react";
+import { Home, Car, Image, Info, User, Phone, Tag } from "lucide-react";
 
 const NavContainer = styled.nav<{ $hidden: boolean }>`
   position: fixed;
