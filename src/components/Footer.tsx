@@ -204,7 +204,7 @@ const Footer: React.FC = () => {
           <FooterSection>
             <h3>Quick Links</h3>
             <FooterLink to="/cars">View Cars</FooterLink>
-            <FooterLink to="/book-inspection">Book Inspection</FooterLink>
+            <FooterLink to="/book-inspection">Book Inspectionss</FooterLink>
             <FooterLink to="/about">About Us</FooterLink>
             <FooterLink to="/contact">Contact</FooterLink>
           </FooterSection>
