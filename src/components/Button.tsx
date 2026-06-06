@@ -85,6 +85,7 @@ const ButtonBase = styled(motion.button)<{
           // background: transparent;
           color: #dc2626;
           border: 2px solid #dc2626;
+          border-top: 2px solid transparent;
 
           &:hover:not(:disabled) {
             color: white;
