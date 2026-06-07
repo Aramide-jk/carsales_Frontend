@@ -32,7 +32,7 @@ api.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // Response interceptor - Handle common errors
@@ -65,7 +65,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export interface AuthResponse {
@@ -98,8 +98,8 @@ export const signOut = async (): Promise<{ message: string }> => {
 };
 
 export const getProfile = async (): Promise<User> => {
-  const res = await api.get<{ data: User }>("/auth/profile");
-  return res.data.data;
+  const res = await api.get<User>("/auth/profile");
+  return res.data;
 };
 
 // ================= CARS =================
@@ -110,20 +110,20 @@ export const getProfile = async (): Promise<User> => {
 
 export const getCars = async (
   page = 1,
-  limit = 16
+  limit = 16,
 ): Promise<CarAPIResponse> => {
   const res = await api.get<CarAPIResponse>(
-    `/cars?page=${page}&limit=${limit}`
+    `/cars?page=${page}&limit=${limit}`,
   );
   return res.data;
 };
 
 export const getGalleryCars = async (
   page = 1,
-  limit = 20
+  limit = 20,
 ): Promise<CarAPIResponse> => {
   const res = await api.get<CarAPIResponse>(
-    `/cars?page=${page}&limit=${limit}`
+    `/cars?page=${page}&limit=${limit}`,
   );
   return res.data;
 };
@@ -146,7 +146,7 @@ export const createCar = async (carData: FormData): Promise<Car> => {
 
 export const updateCar = async (
   id: string,
-  carData: FormData
+  carData: FormData,
 ): Promise<Car> => {
   const res = await api.patch<{ data: Car }>(`/cars/${id}`, carData, {
     headers: { "Content-Type": "multipart/form-data" },
@@ -167,18 +167,18 @@ export const getInspections = async (): Promise<InspectionBooking[]> => {
 
 export const updateInspectionStatus = async (
   id: string,
-  status: InspectionBooking["status"]
+  status: InspectionBooking["status"],
 ): Promise<InspectionBooking> => {
   const res = await api.patch<{ data: InspectionBooking }>(
     `/inspections/${id}/status`,
-    { status }
+    { status },
   );
   return res.data.data;
 };
 
 // ================= SELL REQUESTS =================
 export const createSellRequest = async (
-  sellRequestData: FormData
+  sellRequestData: FormData,
 ): Promise<any> => {
   const res = await api.post<{ data: any }>("/sell-requests", sellRequestData, {
     headers: { "Content-Type": "multipart/form-data" },
@@ -193,7 +193,7 @@ export const getSellRequests = async (): Promise<any[]> => {
 
 export const updateSellRequestStatus = async (
   id: string,
-  status: "pending" | "approved" | "rejected"
+  status: "pending" | "approved" | "rejected",
 ): Promise<{ message: string }> => {
   const res = await api.patch<{ message: string }>(`/sell-requests/${id}`, {
     status,
@@ -209,7 +209,7 @@ export const getPurchases = async (): Promise<Purchase[]> => {
 
 export const updatePurchaseStatus = async (
   id: string,
-  status: Purchase["status"]
+  status: Purchase["status"],
 ): Promise<Purchase> => {
   const res = await api.patch<{ data: Purchase }>(`/purchases/${id}/status`, {
     status,

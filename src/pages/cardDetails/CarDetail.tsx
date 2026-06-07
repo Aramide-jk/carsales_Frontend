@@ -108,13 +108,13 @@ const CarDetail: React.FC = () => {
 
   const nextImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === galleryImages.length - 1 ? 0 : prev + 1
+      prev === galleryImages.length - 1 ? 0 : prev + 1,
     );
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? galleryImages.length - 1 : prev - 1
+      prev === 0 ? galleryImages.length - 1 : prev - 1,
     );
   };
 
@@ -274,8 +274,8 @@ const CarDetail: React.FC = () => {
                   transition={{ duration: 0.6, delay: 0.5 }}>
                   <ActionButtons>
                     <a
-                      href={`https://wa.me/message/Q2XBMF4ZSDNK1?text=${encodeURIComponent(
-                        `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`
+                      href={`https://wa.me/message/LJBYJAKZGOFQK1?text=${encodeURIComponent(
+                        `Hello, I'm interested in the ${car.brand} ${car.model} (${car.year}) listed on your website.`,
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"

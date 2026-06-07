@@ -74,7 +74,7 @@ const Profile: React.FC = () => {
     return <LoadingSpinner text={error} />;
   }
 
-  if (!user) return null;
+  if (!user) return <LoadingSpinner text="Loading Profile..." />;
 
   const getStatusIcon = (status: string) => {
     if (status === "completed") return <Check size={20} />;

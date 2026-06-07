@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   Phone,
@@ -40,7 +40,6 @@ import {
   Label,
   Input,
   TextArea,
-  SuccessMessage,
   ErrorMessage,
 } from "./contact.styles";
 
@@ -55,9 +54,18 @@ const Contact: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const successTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (successTimeoutRef.current) {
+        clearTimeout(successTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -71,7 +79,18 @@ const Contact: React.FC = () => {
     setError(null);
     try {
       await sendContactMessage(formData);
+      // show success state, clear form immediately, then revert button after 3s
       setIsSubmitted(true);
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+      successTimeoutRef.current = window.setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
     } catch (err) {
       setError("Failed to send message. Please try again later.");
       console.error(err);
@@ -84,19 +103,19 @@ const Contact: React.FC = () => {
     {
       icon: Phone,
       title: "Phone",
-      content: "+234 803 737 188 1",
+      content: "+2348130135756",
       description: "Call us anytime for immediate assistance",
     },
     {
       icon: Mail,
       title: "Email",
-      content: "jkautos97@gmail.com",
+      content: "jkautosng@gmail.com",
       description: "Send us your questions and we'll respond promptly",
     },
     {
       icon: MapPin,
       title: "Address",
-      content: "jk, mabushi expressway,",
+      content: "Amabushi expressway,",
       description: "City Center, abuja, Nigeria",
     },
     {
@@ -164,117 +183,111 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.8 }}>
               <SectionTitle>Send us a Message</SectionTitle>
 
-              {isSubmitted ? (
-                <SuccessMessage
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}>
-                  <CheckCircle size={48} className="success-icon" />
-                  <h3>Message Sent Successfully!</h3>
-                  <p>
-                    Thank you for contacting JK_AUTOS. We've received your
-                    message and will get back to you within 24 hours.
-                  </p>
-                </SuccessMessage>
-              ) : (
-                <>
-                  <Form onSubmit={handleSubmit}>
-                    <FormRow>
-                      <FormGroup>
-                        <Label htmlFor="name">
-                          <User size={16} />
-                          Full Name
-                        </Label>
-                        <Input
-                          type="text"
-                          id="fullName"
-                          name="fullName"
-                          placeholder="Enter your full name"
-                          value={formData.fullName}
-                          onChange={handleChange}
-                          required
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <Label htmlFor="email">
-                          <Mail size={16} />
-                          Email
-                        </Label>
-                        <Input
-                          type="email"
-                          id="email"
-                          name="email"
-                          placeholder="Enter your email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                        />
-                      </FormGroup>
-                    </FormRow>
+              <Form onSubmit={handleSubmit}>
+                <FormRow>
+                  <FormGroup>
+                    <Label htmlFor="name">
+                      <User size={16} />
+                      Full Name
+                    </Label>
+                    <Input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      placeholder="Enter your full name"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      disabled={isSubmitted}
+                      required
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label htmlFor="email">
+                      <Mail size={16} />
+                      Email
+                    </Label>
+                    <Input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      disabled={isSubmitted}
+                      required
+                    />
+                  </FormGroup>
+                </FormRow>
 
-                    <FormRow>
-                      <FormGroup>
-                        <Label htmlFor="phone">
-                          <Phone size={16} />
-                          Phone
-                        </Label>
-                        <Input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          placeholder="Enter your phone number"
-                          value={formData.phone}
-                          onChange={handleChange}
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <Label htmlFor="subject">Subject</Label>
-                        <Input
-                          type="text"
-                          id="subject"
-                          name="subject"
-                          placeholder="What's this about?"
-                          value={formData.subject}
-                          onChange={handleChange}
-                          required
-                        />
-                      </FormGroup>
-                    </FormRow>
+                <FormRow>
+                  <FormGroup>
+                    <Label htmlFor="phone">
+                      <Phone size={16} />
+                      Phone
+                    </Label>
+                    <Input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="Enter your phone number"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      disabled={isSubmitted}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      placeholder="What's this about?"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      disabled={isSubmitted}
+                      required
+                    />
+                  </FormGroup>
+                </FormRow>
 
-                    <FormGroup>
-                      <Label htmlFor="message">
-                        <MessageCircle size={16} />
-                        Message
-                      </Label>
-                      <TextArea
-                        id="message"
-                        name="message"
-                        placeholder="Tell us how we can help you..."
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                      />
-                    </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="message">
+                    <MessageCircle size={16} />
+                    Message
+                  </Label>
+                  <TextArea
+                    id="message"
+                    name="message"
+                    placeholder="Tell us how we can help you..."
+                    value={formData.message}
+                    onChange={handleChange}
+                    disabled={isSubmitted}
+                    required
+                  />
+                </FormGroup>
 
-                    <Button
-                      type="submit"
-                      variant="primary"
-                      size="large"
-                      fullWidth
-                      disabled={isLoading}>
-                      {isLoading ? (
-                        "Sending..."
-                      ) : (
-                        <>
-                          <Send size={18} />
-                          Send Message
-                        </>
-                      )}
-                    </Button>
-                    {error && <ErrorMessage>{error}</ErrorMessage>}
-                  </Form>
-                </>
-              )}
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="large"
+                  fullWidth
+                  disabled={isLoading || isSubmitted}>
+                  {isSubmitted ? (
+                    <>
+                      Message Sent
+                      <CheckCircle size={18} />
+                    </>
+                  ) : isLoading ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      Send Message
+                    </>
+                  )}
+                </Button>
+                {error && <ErrorMessage>{error}</ErrorMessage>}
+              </Form>
             </FormCard>
           </ContactForm>
         </ContactGrid>
@@ -300,7 +313,7 @@ const Contact: React.FC = () => {
       </MapSection>
 
       <WhatsAppButton
-        href="https://wa.me/message/Q2XBMF4ZSDNK1"
+        href="https://wa.me/message/LJBYJAKZGOFQK1"
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1 }}

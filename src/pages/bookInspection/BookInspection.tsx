@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import {
@@ -286,9 +286,10 @@ const InfoCard = styled.div`
 
 const BookInspection: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const preSelectedCarId = searchParams.get("car");
-  const { user } = useAuth();
+  const { user, token } = useAuth();
 
   const [cars, setCars] = useState<any[]>([]);
   const [formData, setFormData] = useState({
@@ -331,14 +332,14 @@ const BookInspection: React.FC = () => {
 
   const selectedCarDetails = useMemo(
     () => cars.find((car) => car._id === formData.selectedCar),
-    [cars, formData.selectedCar]
+    [cars, formData.selectedCar],
   );
 
   // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -346,6 +347,10 @@ const BookInspection: React.FC = () => {
   // Submit form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!token || !user) {
+      navigate("/signin");
+      return;
+    }
     setIsLoading(true);
     try {
       const { selectedCar, ...rest } = formData;

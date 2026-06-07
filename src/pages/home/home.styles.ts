@@ -23,9 +23,11 @@ export const HeroBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("https://i.pinimg.com/736x/d5/62/31/d56231182c2b7b3f34808a4789f6e76f.jpg")
-    center/cover;
-  // opacity: 0.2;
+  background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)),
+    url("https://i.pinimg.com/736x/d5/62/31/d56231182c2b7b3f34808a4789f6e76f.jpg");
+  background-position: center;
+  background-size: cover;
   z-index: 1;
 `;
 
@@ -85,7 +87,7 @@ export const Section = styled.section`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 3rem 0;
+    // padding: 3rem 0;
   }
 `;
 
@@ -230,7 +232,7 @@ export const ExploreNowText = styled.div`
 export const InfoBoxGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  gap: 0.5rem;
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -240,8 +242,8 @@ export const InfoBox = styled(motion(Link))`
   flex-direction: column;
   justify-content: space-between;
   // text-align: center;
-  padding: 3rem;
-  border-radius: 20px;
+  padding: 2rem;
+  border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   position: relative;
   text-decoration: none;
@@ -269,12 +271,12 @@ export const InfoBox = styled(motion(Link))`
     bottom: 0;
     background-size: cover;
     background-position: center;
-    border-radius: 20px;
+    border-radius: 10px;
     transition: opacity 0.3s ease;
     z-index: 1;
 
     @media (max-width: 768px) {
-      border-radius: 0;
+      // border-radius: 0;
     }
 
     &::after {
@@ -289,7 +291,7 @@ export const InfoBox = styled(motion(Link))`
       );
     }
     @media (max-width: 768px) {
-      border-radius: 0;
+      // border-radius: 10px;
     }
   }
 
@@ -304,12 +306,16 @@ export const InfoBox = styled(motion(Link))`
 
   h3 {
     font-family: "Playfair Display", serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: 1rem;
     color: white;
     position: relative;
     padding-bottom: 0.5rem;
     transition: color 0.3s ease;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
 
     &::after {
       content: "";

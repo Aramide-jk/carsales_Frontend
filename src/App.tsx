@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 
@@ -35,6 +41,16 @@ const MainContent = styled.main`
   min-height: calc(100vh - 120px);
 `;
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <Router>
@@ -42,6 +58,7 @@ function App() {
         <AppContainer>
           <GlobalStyles />
           <Navbar />
+          <ScrollToTop />
           <MainContent>
             <AnimatePresence mode="wait">
               <Routes>
